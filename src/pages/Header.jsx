@@ -50,7 +50,7 @@ const HeaderWrap = styled.header`
   align-items: center;
 `;
 
-const Logo = styled.h1`
+export const Logo = styled.h1`
   padding-top: 8px;
 `;
 
