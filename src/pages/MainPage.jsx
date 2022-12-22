@@ -5,7 +5,6 @@ import MainViewArticle from "../components/MainViewArticle";
 const MainPage = () => {
   return (
     <div>
-      MainPage
       <Banner />
       <MainViewArticle />
     </div>

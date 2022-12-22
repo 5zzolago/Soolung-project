@@ -4,6 +4,16 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+import Grid from "@mui/system/Unstable_Grid";
+import styled from "@mui/system/styled";
+import GridView from "./GirdView";
+
+const Item = styled("div")(({ theme }) => ({
+  backgroundColor: "#c3bdbd",
+  width: "230px",
+  height: "230px",
+  textAlign: "center",
+}));
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -49,37 +59,52 @@ export default function BasicTabs() {
     <Box sx={{ width: "100%" }}>
       <br />
       <br />
-      <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+      <Box sx={{ borderBottom: 1, borderColor: "black" }}>
         <Tabs
           value={value}
           onChange={handleChange}
           aria-label="basic tabs example"
         >
-          <Tab label="ALL" {...a11yProps(0)} />
-          <Tab label="SOJU" {...a11yProps(1)} />
-          <Tab label="BEER" {...a11yProps(2)} />
-          <Tab label="WINE" {...a11yProps(3)} />
-          <Tab label="WHISKY" {...a11yProps(4)} />
+          <Tab sx={{ color: "black" }} label="ALL" {...a11yProps(0)} />
+          <Tab sx={{ color: "black" }} label="SOJU" {...a11yProps(1)} />
+          <Tab sx={{ color: "black" }} label="BEER" {...a11yProps(2)} />
+          <Tab sx={{ color: "black" }} label="WINE" {...a11yProps(3)} />
+          <Tab sx={{ color: "black" }} label="WHISKY" {...a11yProps(4)} />
         </Tabs>
       </Box>
+
       <TabPanel value={value} index={0}>
-        모두 보기
-      </TabPanel>
-      <TabPanel value={value} index={0}>
-        모두 보기
+        <GridView />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        소주 보기
+        <GridView />
       </TabPanel>
       <TabPanel value={value} index={2}>
-        맥주 보기
+        <GridView />
       </TabPanel>
       <TabPanel value={value} index={3}>
-        와인 보기
+        <GridView />
       </TabPanel>
       <TabPanel value={value} index={4}>
-        위스키 보기
+        <GridView />
       </TabPanel>
     </Box>
   );
 }
+
+<Box sx={{ flexGrow: 1 }}>
+  <Grid container spacing={2}>
+    <Grid xs={8}>
+      <Item>xs=8</Item>
+    </Grid>
+    <Grid xs={4}>
+      <Item>xs=4</Item>
+    </Grid>
+    <Grid xs={4}>
+      <Item>xs=4</Item>
+    </Grid>
+    <Grid xs={8}>
+      <Item>xs=8</Item>
+    </Grid>
+  </Grid>
+</Box>;
