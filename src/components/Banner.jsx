@@ -14,6 +14,8 @@ export default function Banner() {
   };
   return (
     <Slider {...settings}>
+      {/* 아티클의 이미지, 타이틀, 가져오고
+      배너 클릭 시 해당 아티클로 보내줘야 함 */}
       <div>
         <h3>이미지 1</h3>
       </div>
