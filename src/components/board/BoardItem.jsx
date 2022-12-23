@@ -5,16 +5,16 @@ import styled from "styled-components";
 const BoardItem = ({ item }) => {
   return (
     <Link to={`/board/${item.id}`}>
-      <Box
+      <ItemBox
         sx={{
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
           borderBottom: 1,
           borderColor: "#ccc",
-          py: 2,
+          py: 3,
           px: 1,
-          mb: 2,
+          mb: 1,
         }}
       >
         <TextWrap>
@@ -35,12 +35,24 @@ const BoardItem = ({ item }) => {
         <ImgWrap>
           <img src={item.img} alt="썸네일" />
         </ImgWrap>
-      </Box>
+      </ItemBox>
     </Link>
   );
 };
 
 export default BoardItem;
+
+const ItemBox = styled(Box)`
+  &:hover {
+    h1 {
+      font-weight: 700;
+    }
+
+    img {
+      transform: scale(1.1);
+    }
+  }
+`;
 
 const Title = styled.h1`
   font-size: 24px;
@@ -65,12 +77,16 @@ const ImgWrap = styled.div`
   margin-right: 2.4rem;
   width: 180px;
   height: 180px;
+  min-width: 180px;
+  min-height: 180px;
+  overflow: hidden;
 
   img {
     display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 300ms ease-in-out;
   }
 `;
 
