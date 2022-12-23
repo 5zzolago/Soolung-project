@@ -44,6 +44,8 @@ const ArticleDetailCommentWrite = () => {
         </ArticleDetailForm>
       </ArticleDetailContainer>
       <ArticleDetailComment />
+      <ArticleDetailComment />
+      <ArticleDetailComment />
     </ArticleDetailWrap>
   );
 };

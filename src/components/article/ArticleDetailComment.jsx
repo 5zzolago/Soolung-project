@@ -46,6 +46,7 @@ const ArticleDetailContainer = styled.div`
   gap: 5px;
   margin-top: 2rem;
   padding-bottom: 2rem;
+  margin-bottom: 4rem;
   border-bottom: solid #d3d3d3 2px;
 `;
 
