@@ -1,54 +1,58 @@
 import { Link } from "react-router-dom";
 import { Box, Typography } from "@mui/material";
 import styled from "styled-components";
-import thumbnail from "../../assets/board-thumbnail.jpg";
 
-const BoardItem = () => {
+const BoardItem = ({ item }) => {
   return (
-    <Link to={"/board/1"}>
-      <Box
+    <Link to={`/board/${item.id}`}>
+      <ItemBox
         sx={{
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
           borderBottom: 1,
           borderColor: "#ccc",
-          py: 2,
+          py: 3,
           px: 1,
-          mb: 2,
+          mb: 1,
         }}
       >
         <TextWrap>
-          <Title>집에서 즐기는 혼술</Title>
-          <TextBody>
-            오늘은 안주 간단하게 해서 혼술 즐겨봅니다~ 오늘은 안주 간단하게 해서
-            혼술 즐겨봅니다~ 오늘은 안주 간단하게 해서 혼술 즐겨봅니다~ 오늘은
-            안주 간단하게 해서 혼술 즐겨봅니다~ 혼술 즐겨봅니다~ 오늘은 안주
-            간단하게 해서 혼술 즐겨봅니다~ 오늘은 안주 간단하게 해서 혼술
-            즐겨봅니다~ 혼술 즐겨봅니다~ 오늘은 안주 간단하게 해서 혼술
-            즐겨봅니다~ 오늘은 안주 간단하게 해서 혼술 즐겨봅니다~
-          </TextBody>
+          <Title>{item.title}</Title>
+          <TextBody>{item.body}</TextBody>
           <InfoTextWrap>
             <Typography variant="body2" sx={{ mr: 4, color: "#999" }}>
-              댓글 0개
+              댓글 {item.comments}개
             </Typography>
             <Typography variant="body2" sx={{ mr: 4, color: "#999" }}>
-              by 닉네임
+              by {item.username}
             </Typography>
             <Typography variant="body2" sx={{ color: "#999" }}>
-              2022.12.22
+              {new Date(item.createdDate).toLocaleString().slice(0, 12)}
             </Typography>
           </InfoTextWrap>
         </TextWrap>
         <ImgWrap>
-          <img src={thumbnail} alt="" />
+          <img src={item.img} alt="썸네일" />
         </ImgWrap>
-      </Box>
+      </ItemBox>
     </Link>
   );
 };
 
 export default BoardItem;
+
+const ItemBox = styled(Box)`
+  &:hover {
+    h1 {
+      font-weight: 700;
+    }
+
+    img {
+      transform: scale(1.1);
+    }
+  }
+`;
 
 const Title = styled.h1`
   font-size: 24px;
@@ -59,6 +63,7 @@ const Title = styled.h1`
 `;
 
 const TextWrap = styled.div`
+  width: 80%;
   padding: 0 20px;
 `;
 
@@ -69,7 +74,20 @@ const InfoTextWrap = styled.div`
 `;
 
 const ImgWrap = styled.div`
-  padding-right: 2.4rem;
+  margin-right: 2.4rem;
+  width: 180px;
+  height: 180px;
+  min-width: 180px;
+  min-height: 180px;
+  overflow: hidden;
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 300ms ease-in-out;
+  }
 `;
 
 const TextBody = styled.p`
