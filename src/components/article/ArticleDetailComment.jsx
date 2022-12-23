@@ -4,14 +4,15 @@ import { faPenToSquare, faXmark } from "@fortawesome/free-solid-svg-icons";
 import Rating from "@mui/material/Rating";
 import styled from "styled-components";
 
-const ArticleDetailComment = () => {
+const ArticleDetailComment = ({ articleComment }) => {
+  const { id, username, comment, star, createdDate } = articleComment;
   return (
     <ArticleDetailWrap>
       <ArticleDetailContainer>
         <ArticleDetailMainBox>
           <ArticleDetailUserNameBox>
-            <ArticleDetailUserName>닉네임</ArticleDetailUserName>
-            <Rating name="read-only" value={3} readOnly />
+            <ArticleDetailUserName>{username}</ArticleDetailUserName>
+            <Rating name="read-only" value={Number(star)} readOnly />
           </ArticleDetailUserNameBox>
           <ArticleDetailBtnBox>
             <ArticleDetailUpdateBtn>
@@ -23,12 +24,10 @@ const ArticleDetailComment = () => {
           </ArticleDetailBtnBox>
         </ArticleDetailMainBox>
         <ArticleDetailCommentBox>
-          <ArticleDetailCommentText>
-            댓글 내용입니다. 댓글 내용입니다. 댓글 내용입니다. 댓글 내용입니다.
-          </ArticleDetailCommentText>
+          <ArticleDetailCommentText>{comment}</ArticleDetailCommentText>
         </ArticleDetailCommentBox>
         <ArticleDetailCreatAtBox>
-          <ArticleDetailCreateAt>2022-12-22</ArticleDetailCreateAt>
+          <ArticleDetailCreateAt>{createdDate}</ArticleDetailCreateAt>
         </ArticleDetailCreatAtBox>
       </ArticleDetailContainer>
     </ArticleDetailWrap>
