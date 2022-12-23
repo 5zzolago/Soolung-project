@@ -4,23 +4,30 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import Grid from "@mui/system/Unstable_Grid";
-import styled from "@mui/system/styled";
 import GridView from "./ArticleItem";
-import Button from '../button/Button';
+import Button from "../button/Button";
+import { useLocation } from "react-router-dom";
+import styled from "styled-components";
 
-const StyledH4 = styled("div")(({ them }) => ({
-  fontSize: "30px",
-  fontWeight: "bolder",
-  margin: "100px 0 10px 0",
-}));
+const StyledH4 = styled.div`
+  font-size: 30px;
+  font-weight: bolder;
+  margin: 80px 0 20px;
+`;
 
-const Item = styled("div")(({ theme }) => ({
-  backgroundColor: "#c3bdbd",
-  width: "230px",
-  height: "230px",
-  textAlign: "center",
-}));
+const ButtonWrap = styled.div`
+  display: flex;
+  justify-content: ${(props) =>
+    props.page === "article" ? "center" : "flex-end"};
+  align-items: center;
+  margin: 2rem 0 7rem;
+  padding-right: ${(props) => (props.page === "article" ? "3rem" : "")};
+`;
+
+const Wrap = styled.div`
+  display: flex;
+  justify-content: center;
+`;
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -34,7 +41,7 @@ function TabPanel(props) {
       {...other}
     >
       {value === index && (
-        <Box sx={{ p: 15 }}>
+        <Box sx={{ p: 15, margin: 0, padding: 5 }}>
           <Typography>{children}</Typography>
         </Box>
       )}
@@ -56,6 +63,8 @@ function a11yProps(index) {
 }
 
 export default function BasicTabs() {
+  const location = useLocation();
+  const currentLocation = location.pathname.slice(1);
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
@@ -63,56 +72,45 @@ export default function BasicTabs() {
   };
 
   return (
-    <Box sx={{ width: "100%" }}>
-      <StyledH4>Article</StyledH4>
-      <Box sx={{ borderBottom: 1, borderColor: "black" }}>
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          aria-label="basic tabs example"
-        >
-          <Tab sx={{ color: "black" }} label="ALL" {...a11yProps(0)} />
-          <Tab sx={{ color: "black" }} label="SOJU" {...a11yProps(1)} />
-          <Tab sx={{ color: "black" }} label="BEER" {...a11yProps(2)} />
-          <Tab sx={{ color: "black" }} label="WINE" {...a11yProps(3)} />
-          <Tab sx={{ color: "black" }} label="WHISKY" {...a11yProps(4)} />
-        </Tabs>
+    <Wrap>
+      <Box sx={{ width: "100%" }}>
+        <StyledH4>Article</StyledH4>
+        <Box sx={{ borderBottom: 1, borderColor: "black" }}>
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            aria-label="basic tabs example"
+          >
+            <Tab sx={{ color: "black" }} label="ALL" {...a11yProps(0)} />
+            <Tab sx={{ color: "black" }} label="SOJU" {...a11yProps(1)} />
+            <Tab sx={{ color: "black" }} label="BEER" {...a11yProps(2)} />
+            <Tab sx={{ color: "black" }} label="WINE" {...a11yProps(3)} />
+            <Tab sx={{ color: "black" }} label="WHISKY" {...a11yProps(4)} />
+          </Tabs>
+        </Box>
+
+        <TabPanel value={value} index={0}>
+          <GridView />
+        </TabPanel>
+        <TabPanel value={value} index={1}>
+          <GridView />
+        </TabPanel>
+        <TabPanel value={value} index={2}>
+          <GridView />
+        </TabPanel>
+        <TabPanel value={value} index={3}>
+          <GridView />
+        </TabPanel>
+        <TabPanel value={value} index={4}>
+          <GridView />
+        </TabPanel>
+
+        <ButtonWrap page={"article"}>
+          {currentLocation === "" ? (
+            <Button size={"primary"} type={"article"} text={"더보기"} />
+          ) : null}
+        </ButtonWrap>
       </Box>
-
-      <TabPanel value={value} index={0}>
-        <GridView />
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        <GridView />
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        <GridView />
-      </TabPanel>
-      <TabPanel value={value} index={3}>
-        <GridView />
-      </TabPanel>
-      <TabPanel value={value} index={4}>
-        <GridView />
-      </TabPanel>
-
-      
-    </Box>
+    </Wrap>
   );
 }
-
-<Box sx={{ flexGrow: 1 }}>
-  <Grid container spacing={2}>
-    <Grid xs={8}>
-      <Item>xs=8</Item>
-    </Grid>
-    <Grid xs={4}>
-      <Item>xs=4</Item>
-    </Grid>
-    <Grid xs={4}>
-      <Item>xs=4</Item>
-    </Grid>
-    <Grid xs={8}>
-      <Item>xs=8</Item>
-    </Grid>
-  </Grid>
-</Box>;
