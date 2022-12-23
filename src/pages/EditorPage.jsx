@@ -40,7 +40,7 @@ const EditorPage = () => {
         <input style={userPasswordStyle} placeholder="비밀번호"></input>
       </div>
       <div>
-        <input style={titleStyle} placeholder="제목을 입력해주세요"></input>
+        <input style={titleStyle} placeholder="제목을123 입력해주세요"></input>
       </div>
       <div>
         <textarea
