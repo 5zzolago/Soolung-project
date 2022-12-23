@@ -5,16 +5,17 @@ import BoardItem from "./BoardItem";
 import Button from "../button/Button";
 import { Typography } from "@mui/material";
 import styled from "styled-components";
-import { getBoard } from "../../store/modules/boardSlice";
+import { getBoard, getAllBoard } from "../../store/modules/boardSlice";
 
 const BoardList = () => {
   const board = useSelector((state) => state.boardSlice.list);
   const dispatch = useDispatch();
   const location = useLocation();
+
   const currentLocation = location.pathname.slice(1);
 
   useEffect(() => {
-    dispatch(getBoard());
+    !currentLocation ? dispatch(getBoard()) : dispatch(getAllBoard());
   }, [dispatch]);
 
   return (
@@ -30,11 +31,11 @@ const BoardList = () => {
           <BoardItem key={item.id} item={item} />
         ))}
       </div>
-      <ButtonWrap page={currentLocation === "" ? "main" : "board"}>
+      <ButtonWrap page={!currentLocation ? "main" : "board"}>
         <Button
-          size={currentLocation === "" ? "primary" : "secondary"}
-          type={currentLocation === "" ? "more" : "editor"}
-          text={currentLocation === "" ? "더보기" : "글쓰기"}
+          size={!currentLocation ? "primary" : "secondary"}
+          type={!currentLocation ? "more" : "editor"}
+          text={!currentLocation ? "더보기" : "글쓰기"}
         />
       </ButtonWrap>
     </Section>
