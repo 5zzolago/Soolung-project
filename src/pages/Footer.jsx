@@ -33,6 +33,7 @@ export default Footer;
 const FooterWrap = styled.footer`
   width: 100%;
   background-color: #f2f2f2;
+  margin-top: 3rem;
 `;
 
 const CopyRight = styled.p`
