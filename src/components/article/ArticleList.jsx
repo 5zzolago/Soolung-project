@@ -6,7 +6,8 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Grid from "@mui/system/Unstable_Grid";
 import styled from "@mui/system/styled";
-import GridView from "./GirdView";
+import GridView from "./ArticleItem";
+import Button from '../button/Button';
 
 const StyledH4 = styled("div")(({ them }) => ({
   fontSize: "30px",
@@ -93,6 +94,8 @@ export default function BasicTabs() {
       <TabPanel value={value} index={4}>
         <GridView />
       </TabPanel>
+
+      
     </Box>
   );
 }

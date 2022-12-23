@@ -1,13 +1,13 @@
 import React from "react";
 import BoardList from "../components/board/BoardList";
-import Banner from "../components/Banner";
-import MainViewArticle from "../components/MainViewArticle";
+import Banner from "../components/main/Banner";
+import ArticleList from '../components/article/ArticleList'
 
 const MainPage = () => {
   return (
     <div>
       <Banner />
-      <MainViewArticle />
+      <ArticleList />
       <BoardList />
     </div>
   );

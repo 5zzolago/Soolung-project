@@ -1,7 +1,6 @@
 import React from "react";
-import GridView from "../components/GirdView";
 import styled from "styled-components";
-import MainViewArticle from "../components/MainViewArticle";
+import MainViewArticle from "../components/article/ArticleList";
 
 const StyledDiv = styled.div`
   padding: 0;
