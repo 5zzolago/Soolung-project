@@ -4,42 +4,63 @@ import Rating from "@mui/material/Rating";
 import ArticleDetailComment from "./ArticleDetailComment";
 import styled from "styled-components";
 
-const ArticleDetailCommentWrite = () => {
+const ArticleDetailCommentWrite = ({
+  articleFormData,
+  onFormValueChangeEvent,
+  onArticleFormSubmitEvent,
+}) => {
+  const { username, password, comment, star } = articleFormData;
   return (
     <ArticleDetailWrap>
       <ArticleDetailContainer>
         <ArticleDetailHeadBox>
           <ArticleDetailHeadText>댓글</ArticleDetailHeadText>
         </ArticleDetailHeadBox>
-        <ArticleDetailForm>
+        <ArticleDetailForm onSubmit={onArticleFormSubmitEvent}>
           <ArticleDetailInputBox>
             <TextField
               id="username"
+              name="username"
               type="text"
               label="작성자"
               variant="outlined"
               size="small"
               sx={{ width: { sm: 280 } }}
+              value={username}
+              onChange={onFormValueChangeEvent}
             />
             <TextField
               id="password"
+              name="password"
               type="password"
               label="비밀번호"
               variant="outlined"
               size="small"
               sx={{ width: { sm: 280 } }}
+              value={password}
+              onChange={onFormValueChangeEvent}
             />
-            <Rating name="simple-controlled" />
+            <Rating
+              id="star"
+              name="star"
+              value={Number(star)}
+              onChange={onFormValueChangeEvent}
+            />
           </ArticleDetailInputBox>
           <ArticleDetailCommentBox>
             <TextField
               id="comment"
+              name="comment"
               label="어떤 이야기를 나누고 싶으신가요?"
               fullWidth
               multiline
               rows={1.5}
+              value={comment}
+              onChange={onFormValueChangeEvent}
             />
-            <ArticleDetailCommentBtn>등록하기</ArticleDetailCommentBtn>
+            <ArticleDetailCommentBtn type="submit">
+              등록하기
+            </ArticleDetailCommentBtn>
           </ArticleDetailCommentBox>
         </ArticleDetailForm>
       </ArticleDetailContainer>
