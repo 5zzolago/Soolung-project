@@ -8,7 +8,6 @@ import Grid from "@mui/system/Unstable_Grid";
 import styled from "@mui/system/styled";
 import GridView from "./GirdView";
 
-
 const StyledH4 = styled("div")(({ them }) => ({
   fontSize: "30px",
   fontWeight: "bolder",
