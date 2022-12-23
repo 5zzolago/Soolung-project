@@ -1,17 +1,17 @@
 import React from "react";
 import GridView from "../components/GirdView";
 import styled from "styled-components";
+import MainViewArticle from "../components/MainViewArticle";
 
 const StyledDiv = styled.div`
-  padding: 30px 20px 30px 20px;
-  margin: 10px;
-  border-radius: 20px;
+  padding: 0;
+  margin: 0px;
 `;
 
 const ArticlePage = () => {
   return (
     <StyledDiv>
-      <GridView />
+      <MainViewArticle />
     </StyledDiv>
   );
 };

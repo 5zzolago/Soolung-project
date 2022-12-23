@@ -8,6 +8,13 @@ import Grid from "@mui/system/Unstable_Grid";
 import styled from "@mui/system/styled";
 import GridView from "./GirdView";
 
+
+const StyledH4 = styled("div")(({ them }) => ({
+  fontSize: "30px",
+  fontWeight: "bolder",
+  margin: "50px 0 10px 0",
+}));
+
 const Item = styled("div")(({ theme }) => ({
   backgroundColor: "#c3bdbd",
   width: "230px",
@@ -57,8 +64,7 @@ export default function BasicTabs() {
 
   return (
     <Box sx={{ width: "100%" }}>
-      <br />
-      <br />
+      <StyledH4>Article</StyledH4>
       <Box sx={{ borderBottom: 1, borderColor: "black" }}>
         <Tabs
           value={value}

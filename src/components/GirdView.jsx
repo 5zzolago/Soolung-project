@@ -8,38 +8,48 @@ const Item = styled("div")(({ theme }) => ({
   textAlign: "center",
 }));
 
+const StyledTitle = styled("p")(({ theme }) => ({
+  fontWeight: 'bold',
+  marginTop: '5px'
+}));
+
+const StyledStar = styled("p")(({ theme }) => ({
+  fontSize: '14px',
+  marginTop: '2px'
+}));
+
 function GridView() {
   return (
     <Grid columns={3} rowSpacing={2} container spacing={12}>
       <Grid xs={1}>
         <Item>1</Item>
-        <p>제목</p>
-        <p>별점</p>
+        <StyledTitle>박재범과 원소주</StyledTitle>
+        <StyledStar>⭐️ 3.5</StyledStar>
       </Grid>
       <Grid xs={1}>
         <Item>2</Item>
-        <p>제목</p>
-        <p>별점</p>
+        <StyledTitle>제목</StyledTitle>
+        <StyledStar>⭐️ 3.5</StyledStar>
       </Grid>
       <Grid xs={1}>
         <Item>3</Item>
-        <p>제목</p>
-        <p>별점</p>
+        <StyledTitle>제목</StyledTitle>
+        <StyledStar>⭐️ 3.5</StyledStar>
       </Grid>
       <Grid xs={1}>
         <Item>4</Item>
-        <p>제목</p>
-        <p>별점</p>
+        <StyledTitle>제목</StyledTitle>
+        <StyledStar>⭐️ 3.5</StyledStar>
       </Grid>
       <Grid xs={1}>
         <Item>5</Item>
-        <p>제목</p>
-        <p>별점</p>
+        <StyledTitle>제목</StyledTitle>
+        <StyledStar>⭐️ 3.5</StyledStar>
       </Grid>
       <Grid xs={1}>
         <Item>6</Item>
-        <p>제목</p>
-        <p>별점</p>
+        <StyledTitle>제목</StyledTitle>
+        <StyledStar>⭐️ 3.5</StyledStar>
       </Grid>
     </Grid>
   );
