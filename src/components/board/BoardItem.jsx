@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 const BoardItem = ({ item }) => {
   return (
-    <Link to={"/board/1"}>
+    <Link to={`/board/${item.id}`}>
       <Box
         sx={{
           display: "flex",
@@ -22,7 +22,7 @@ const BoardItem = ({ item }) => {
           <TextBody>{item.body}</TextBody>
           <InfoTextWrap>
             <Typography variant="body2" sx={{ mr: 4, color: "#999" }}>
-              댓글 0개
+              댓글 {item.comments}개
             </Typography>
             <Typography variant="body2" sx={{ mr: 4, color: "#999" }}>
               by {item.username}
@@ -33,7 +33,7 @@ const BoardItem = ({ item }) => {
           </InfoTextWrap>
         </TextWrap>
         <ImgWrap>
-          <img src={item.img} alt="" />
+          <img src={item.img} alt="썸네일" />
         </ImgWrap>
       </Box>
     </Link>
@@ -51,6 +51,7 @@ const Title = styled.h1`
 `;
 
 const TextWrap = styled.div`
+  width: 80%;
   padding: 0 20px;
 `;
 
@@ -61,7 +62,16 @@ const InfoTextWrap = styled.div`
 `;
 
 const ImgWrap = styled.div`
-  padding-right: 2.4rem;
+  margin-right: 2.4rem;
+  width: 180px;
+  height: 180px;
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 `;
 
 const TextBody = styled.p`
