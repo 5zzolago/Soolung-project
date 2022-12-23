@@ -11,7 +11,7 @@ import GridView from "./GirdView";
 const StyledH4 = styled("div")(({ them }) => ({
   fontSize: "30px",
   fontWeight: "bolder",
-  margin: "50px 0 10px 0",
+  margin: "100px 0 10px 0",
 }));
 
 const Item = styled("div")(({ theme }) => ({

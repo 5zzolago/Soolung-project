@@ -9,13 +9,13 @@ const Item = styled("div")(({ theme }) => ({
 }));
 
 const StyledTitle = styled("p")(({ theme }) => ({
-  fontWeight: 'bold',
-  marginTop: '5px'
+  fontWeight: "bold",
+  marginTop: "5px",
 }));
 
 const StyledStar = styled("p")(({ theme }) => ({
-  fontSize: '14px',
-  marginTop: '2px'
+  fontSize: "14px",
+  marginTop: "2px",
 }));
 
 function GridView() {
