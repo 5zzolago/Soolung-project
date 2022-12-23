@@ -4,7 +4,7 @@ const EditorPage = () => {
   const userNameStyle = {
     width: "400px",
     height: "50px",
-    borderRadius: "4px",
+    borderRadius: "3px",
     padding: "20px",
   };
   const userPasswordStyle = {
