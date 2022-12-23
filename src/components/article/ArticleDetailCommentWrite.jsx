@@ -6,6 +6,7 @@ import styled from "styled-components";
 
 const ArticleDetailCommentWrite = ({
   articleFormData,
+  articleComment,
   onFormValueChangeEvent,
   onArticleFormSubmitEvent,
 }) => {
@@ -64,9 +65,9 @@ const ArticleDetailCommentWrite = ({
           </ArticleDetailCommentBox>
         </ArticleDetailForm>
       </ArticleDetailContainer>
-      <ArticleDetailComment />
-      <ArticleDetailComment />
-      <ArticleDetailComment />
+      {articleComment.map((cmt) => (
+        <ArticleDetailComment key={cmt.id} articleComment={cmt} />
+      ))}
     </ArticleDetailWrap>
   );
 };
