@@ -1,9 +1,8 @@
 import { Link } from "react-router-dom";
 import { Box, Typography } from "@mui/material";
 import styled from "styled-components";
-import thumbnail from "../../assets/board-thumbnail.jpg";
 
-const BoardItem = () => {
+const BoardItem = ({ item }) => {
   return (
     <Link to={"/board/1"}>
       <Box
@@ -19,29 +18,22 @@ const BoardItem = () => {
         }}
       >
         <TextWrap>
-          <Title>집에서 즐기는 혼술</Title>
-          <TextBody>
-            오늘은 안주 간단하게 해서 혼술 즐겨봅니다~ 오늘은 안주 간단하게 해서
-            혼술 즐겨봅니다~ 오늘은 안주 간단하게 해서 혼술 즐겨봅니다~ 오늘은
-            안주 간단하게 해서 혼술 즐겨봅니다~ 혼술 즐겨봅니다~ 오늘은 안주
-            간단하게 해서 혼술 즐겨봅니다~ 오늘은 안주 간단하게 해서 혼술
-            즐겨봅니다~ 혼술 즐겨봅니다~ 오늘은 안주 간단하게 해서 혼술
-            즐겨봅니다~ 오늘은 안주 간단하게 해서 혼술 즐겨봅니다~
-          </TextBody>
+          <Title>{item.title}</Title>
+          <TextBody>{item.body}</TextBody>
           <InfoTextWrap>
             <Typography variant="body2" sx={{ mr: 4, color: "#999" }}>
               댓글 0개
             </Typography>
             <Typography variant="body2" sx={{ mr: 4, color: "#999" }}>
-              by 닉네임
+              by {item.username}
             </Typography>
             <Typography variant="body2" sx={{ color: "#999" }}>
-              2022.12.22
+              {new Date(item.createdDate).toLocaleString().slice(0, 12)}
             </Typography>
           </InfoTextWrap>
         </TextWrap>
         <ImgWrap>
-          <img src={thumbnail} alt="" />
+          <img src={item.img} alt="" />
         </ImgWrap>
       </Box>
     </Link>

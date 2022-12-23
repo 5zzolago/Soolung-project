@@ -1,13 +1,21 @@
-import { useLocation } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { useLocation, Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import BoardItem from "./BoardItem";
 import Button from "../button/Button";
 import { Typography } from "@mui/material";
 import styled from "styled-components";
+import { getBoard } from "../../store/modules/boardSlice";
 
 const BoardList = () => {
+  const board = useSelector((state) => state.boardSlice.list);
+  const dispatch = useDispatch();
   const location = useLocation();
   const currentLocation = location.pathname.slice(1);
+
+  useEffect(() => {
+    dispatch(getBoard());
+  }, [dispatch]);
 
   return (
     <Section>
@@ -18,11 +26,9 @@ const BoardList = () => {
         <Link to={"/board"}>Board</Link>
       </Typography>
       <div>
-        <BoardItem />
-        <BoardItem />
-        <BoardItem />
-        <BoardItem />
-        <BoardItem />
+        {board.map((item) => (
+          <BoardItem key={item.id} item={item} />
+        ))}
       </div>
       <ButtonWrap page={currentLocation === "" ? "main" : "board"}>
         <Button
