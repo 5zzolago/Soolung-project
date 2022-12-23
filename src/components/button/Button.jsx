@@ -8,8 +8,12 @@ const Button = ({ type, text, size, handler }) => {
     navigate("/board");
   };
 
+  const handleGoToArticle = () => {
+    navigate("/article");
+  };
+
   const handleGoToEditor = () => {
-    navigate("/editor");
+    navigate("/editor"); 
   };
 
   const handleClicked = (type) => {
@@ -19,6 +23,9 @@ const Button = ({ type, text, size, handler }) => {
 
       case "editor":
         return handleGoToEditor();
+
+      case "article":
+        return handleGoToArticle();
 
       default:
         break;

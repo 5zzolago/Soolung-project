@@ -1,11 +1,17 @@
 import React from "react";
+import styled from "styled-components";
+import MainViewArticle from "../components/article/ArticleList";
+
+const StyledDiv = styled.div`
+  padding: 0;
+  margin: 0px;
+`;
 
 const ArticlePage = () => {
   return (
-    <>
-      <div>ArticlePage</div>
-      <div>"test입니다. 무시하세요"</div>
-    </>
+    <StyledDiv>
+      <MainViewArticle />
+    </StyledDiv>
   );
 };
 
