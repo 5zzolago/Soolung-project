@@ -52,6 +52,7 @@ const ArticleDetailCommentWrite = () => {
 
 const ArticleDetailWrap = styled.div`
   width: 100%;
+  padding-bottom: 5rem;
 `;
 
 const ArticleDetailContainer = styled.div`

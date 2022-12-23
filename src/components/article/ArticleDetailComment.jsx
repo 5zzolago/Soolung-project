@@ -45,8 +45,7 @@ const ArticleDetailContainer = styled.div`
   flex-direction: column;
   gap: 5px;
   margin-top: 2rem;
-  padding-bottom: 2rem;
-  margin-bottom: 4rem;
+  padding-bottom: 1.3rem;
   border-bottom: solid #d3d3d3 2px;
 `;
 
