@@ -1,11 +1,50 @@
-import React from "react";
+import React, { useState } from "react";
+import { __updateArticleComment } from "../../store/modules/articleCommentSlice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare, faXmark } from "@fortawesome/free-solid-svg-icons";
+import TextField from "@mui/material/TextField";
+import Modal from "@mui/material/Modal";
+import Box from "@mui/material/Box";
 import Rating from "@mui/material/Rating";
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
 
-const ArticleDetailComment = ({ articleComment }) => {
-  const { id, username, comment, star, createdDate } = articleComment;
+const ArticleDetailComment = ({
+  articleComment,
+  articleEditValue,
+  onCommentDeleteEvent,
+  onEditValueChangeEvent,
+}) => {
+  const { id, username, comment, star, createdDate, password } = articleComment;
+  const dispatch = useDispatch();
+  const [isEditOpen, setIsEditOpen] = useState(false);
+  const [isEditClick, setIsEditClikc] = useState(false);
+  const [editPassword, setEditPassword] = useState("");
+
+  const handleArticleUpdateToggle = () => {
+    setIsEditOpen(true);
+    articleEditValue.comment = "";
+  };
+
+  const handleEditModalClose = () => setIsEditOpen(false);
+  const handleEditModalChange = (e) => setEditPassword(e.target.value);
+
+  const handleModalCheckPasswordClick = () => {
+    if (password === editPassword) {
+      setIsEditOpen(false);
+      setIsEditClikc(true);
+    } else {
+      alert("비밀번호가 틀렸습니다.");
+      return;
+    }
+  };
+
+  const handleEditFormSubmit = (e) => {
+    e.preventDefault();
+    dispatch(__updateArticleComment([id, articleEditValue]));
+    setIsEditClikc(false);
+  };
+
   return (
     <ArticleDetailWrap>
       <ArticleDetailContainer>
@@ -15,21 +54,76 @@ const ArticleDetailComment = ({ articleComment }) => {
             <Rating name="read-only" value={Number(star)} readOnly />
           </ArticleDetailUserNameBox>
           <ArticleDetailBtnBox>
-            <ArticleDetailUpdateBtn>
+            <ArticleDetailUpdateBtn onClick={handleArticleUpdateToggle}>
               <FontAwesomeIcon icon={faPenToSquare} />
             </ArticleDetailUpdateBtn>
-            <ArticleDetailDeleteBtn>
+            <ArticleDetailDeleteBtn onClick={onCommentDeleteEvent(id)}>
               <FontAwesomeIcon icon={faXmark} />
             </ArticleDetailDeleteBtn>
           </ArticleDetailBtnBox>
         </ArticleDetailMainBox>
         <ArticleDetailCommentBox>
-          <ArticleDetailCommentText>{comment}</ArticleDetailCommentText>
+          {isEditClick === false ? (
+            <ArticleDetailCommentText>{comment}</ArticleDetailCommentText>
+          ) : (
+            <ArticleDetailForm onSubmit={handleEditFormSubmit}>
+              <TextField
+                id={id}
+                name="comment"
+                label="어떤 이야기를 나누고 싶으신가요?"
+                fullWidth
+                multiline
+                rows={1.5}
+                value={articleEditValue.comment}
+                onChange={onEditValueChangeEvent}
+              />
+              <ArticleDetailCommentBtn type="submit">
+                등록하기
+              </ArticleDetailCommentBtn>
+              <ArticleDetailCommentBtn
+                type="button"
+                onClick={() => setIsEditClikc(false)}
+              >
+                취소하기
+              </ArticleDetailCommentBtn>
+            </ArticleDetailForm>
+          )}
         </ArticleDetailCommentBox>
         <ArticleDetailCreatAtBox>
           <ArticleDetailCreateAt>{createdDate}</ArticleDetailCreateAt>
         </ArticleDetailCreatAtBox>
       </ArticleDetailContainer>
+      <Modal
+        open={isEditOpen}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <ArticleDetailModalBox>
+            <TextField
+              id="outlined-password-input"
+              label="Password"
+              type="password"
+              size="small"
+              value={editPassword}
+              onChange={handleEditModalChange}
+              autoComplete="current-password"
+            />
+            <ArticleDetailModalBtn
+              variant="outlined"
+              onClick={handleModalCheckPasswordClick}
+            >
+              확인
+            </ArticleDetailModalBtn>
+            <ArticleDetailModalBtn
+              variant="outlined"
+              onClick={handleEditModalClose}
+            >
+              취소
+            </ArticleDetailModalBtn>
+          </ArticleDetailModalBox>
+        </Box>
+      </Modal>
     </ArticleDetailWrap>
   );
 };
@@ -54,6 +148,12 @@ const ArticleDetailMainBox = styled.div`
   width: 100%;
 `;
 
+const ArticleDetailForm = styled.form`
+  width: 100%;
+  display: flex;
+  gap: 1rem;
+`;
+
 const ArticleDetailBtnBox = styled.div`
   width: 10%;
 `;
@@ -63,6 +163,15 @@ const ArticleDetailUpdateBtn = styled.button`
   margin-right: 1.5rem;
   border: 0;
   background-color: transparent;
+`;
+
+const ArticleDetailCommentBtn = styled.button`
+  width: 15%;
+  border-radius: 0.5rem;
+  color: white;
+  background-color: #434343;
+  font-weight: bold;
+  cursor: pointer;
 `;
 
 const ArticleDetailDeleteBtn = styled.button`
@@ -98,5 +207,37 @@ const ArticleDetailCreatAtBox = styled.div`
 const ArticleDetailCreateAt = styled.p`
   font-weight: lighter;
 `;
+
+const ArticleDetailModalBox = styled.div`
+  width: 100%;
+  display: flex;
+  gap: 0.3rem;
+  align-items: center;
+  justify-content: center;
+`;
+
+const ArticleDetailModalBtn = styled.button`
+  width: 13%;
+  height: 2.4rem;
+  border-radius: 0.5rem;
+  color: white;
+  background-color: #434343;
+  font-weight: bold;
+  cursor: pointer;
+`;
+
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: "30%",
+  height: "13%",
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  borderRadius: "2rem",
+  boxShadow: 24,
+  p: 4,
+};
 
 export default ArticleDetailComment;

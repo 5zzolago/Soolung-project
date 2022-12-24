@@ -5,9 +5,12 @@ import ArticleDetailComment from "./ArticleDetailComment";
 import styled from "styled-components";
 
 const ArticleDetailCommentWrite = ({
+  articleEditValue,
   articleFormData,
   articleComment,
+  onCommentDeleteEvent,
   onFormValueChangeEvent,
+  onEditValueChangeEvent,
   onArticleFormSubmitEvent,
 }) => {
   const { username, password, comment, star } = articleFormData;
@@ -65,8 +68,14 @@ const ArticleDetailCommentWrite = ({
           </ArticleDetailCommentBox>
         </ArticleDetailForm>
       </ArticleDetailContainer>
-      {articleComment.map((cmt) => (
-        <ArticleDetailComment key={cmt.id} articleComment={cmt} />
+      {articleComment?.map((cmt) => (
+        <ArticleDetailComment
+          key={cmt.id}
+          articleComment={cmt}
+          articleEditValue={articleEditValue}
+          onEditValueChangeEvent={onEditValueChangeEvent}
+          onCommentDeleteEvent={onCommentDeleteEvent}
+        />
       ))}
     </ArticleDetailWrap>
   );
