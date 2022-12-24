@@ -21,11 +21,11 @@ const BoardItem = ({ item }) => {
           <Title>{item.title}</Title>
           <TextBody>{item.body}</TextBody>
           <InfoTextWrap>
-            <Typography variant="body2" sx={{ mr: 4, color: "#999" }}>
+            <Typography variant="body2" sx={{ mr: 6, color: "#999" }}>
               댓글 {item.comments}개
             </Typography>
-            <Typography variant="body2" sx={{ mr: 4, color: "#999" }}>
-              by {item.username}
+            <Typography variant="body2" sx={{ mr: 2, color: "#999" }}>
+              <Nickname>by {item.username}</Nickname>
             </Typography>
             <Typography variant="body2" sx={{ color: "#999" }}>
               {new Date(item.createdDate).toLocaleString().slice(0, 12)}
@@ -100,4 +100,12 @@ const TextBody = styled.p`
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
+`;
+
+const Nickname = styled.span`
+  display: inline-block;
+  width: 100px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
