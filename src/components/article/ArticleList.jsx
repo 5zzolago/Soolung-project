@@ -62,7 +62,7 @@ function a11yProps(index) {
   };
 }
 
-export default function BasicTabs() {
+export default function BasicTabs({ article }) {
   const location = useLocation();
   const currentLocation = location.pathname.slice(1);
   const [value, setValue] = React.useState(0);
@@ -90,19 +90,19 @@ export default function BasicTabs() {
         </Box>
 
         <TabPanel value={value} index={0}>
-          <GridView />
+          <GridView article={article} categories="all" />
         </TabPanel>
         <TabPanel value={value} index={1}>
-          <GridView />
+          <GridView article={article} categories="soju" />
         </TabPanel>
         <TabPanel value={value} index={2}>
-          <GridView />
+          <GridView article={article} categories="beer" />
         </TabPanel>
         <TabPanel value={value} index={3}>
-          <GridView />
+          <GridView article={article} categories="wine" />
         </TabPanel>
         <TabPanel value={value} index={4}>
-          <GridView />
+          <GridView article={article} categories="whisky" />
         </TabPanel>
 
         <ButtonWrap page={"article"}>

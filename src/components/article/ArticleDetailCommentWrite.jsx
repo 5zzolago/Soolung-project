@@ -5,6 +5,7 @@ import ArticleDetailComment from "./ArticleDetailComment";
 import styled from "styled-components";
 
 const ArticleDetailCommentWrite = ({
+  articleDatas,
   articleEditValue,
   articleFormData,
   articleComment,
@@ -68,15 +69,17 @@ const ArticleDetailCommentWrite = ({
           </ArticleDetailCommentBox>
         </ArticleDetailForm>
       </ArticleDetailContainer>
-      {articleComment?.map((cmt) => (
-        <ArticleDetailComment
-          key={cmt.id}
-          articleComment={cmt}
-          articleEditValue={articleEditValue}
-          onEditValueChangeEvent={onEditValueChangeEvent}
-          onCommentDeleteEvent={onCommentDeleteEvent}
-        />
-      ))}
+      {articleComment
+        .filter((cmt) => cmt.alcoholId === articleDatas.id)
+        .map((cmt) => (
+          <ArticleDetailComment
+            key={cmt.id}
+            articleComment={cmt}
+            articleEditValue={articleEditValue}
+            onEditValueChangeEvent={onEditValueChangeEvent}
+            onCommentDeleteEvent={onCommentDeleteEvent}
+          />
+        ))}
     </ArticleDetailWrap>
   );
 };
