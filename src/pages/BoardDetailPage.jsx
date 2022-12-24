@@ -1,6 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import wine from "../assets/wine.jpg";
+
+import BoardDetailWrite from "../components/board/BoardDetailWrite";
+
 const BoardDetailPage = () => {
   return (
     <BoardDetailWrap>
@@ -22,6 +25,7 @@ const BoardDetailPage = () => {
           you, we've compiled a list of easy-drinking wines to help you identify
           and build your wine palate.
         </BoardDetailDesc>
+        <BoardDetailWrite />
       </BoardDetailPostingContainer>
     </BoardDetailWrap>
   );
@@ -32,10 +36,13 @@ const BoardDetailWrap = styled.div`
 `;
 const BoardDetailTitleContainer = styled.div`
   width: 100%;
+  height: 100px;
+  margin-bottom: 10px;
+  position: relative;
 `;
 
 const BoardDetailTitleName = styled.h1`
-  position: relative;
+  /* position: relative; */
   font-weight: bold;
   text-align: left;
   margin-top: 4rem;
@@ -62,14 +69,16 @@ const BoardDetailPostingContainer = styled.div`
 `;
 
 const BoardDetailImage = styled.div`
+  margin: 0 auto;
   width: 50%;
-  margin-left: 12rem;
-  margin-top: 6rem;
+  img {
+    display: inline-block;
+  }
 `;
 
 const BoardDetailDesc = styled.p`
   font-weight: lighter;
-  font-size: 1.5rem;
+  font-size: 1.1rem;
   margin-top: 4rem;
   margin-bottom: 4rem;
 `;
