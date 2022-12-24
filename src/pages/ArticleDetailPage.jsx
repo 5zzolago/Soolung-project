@@ -25,7 +25,7 @@ const initialState = {
 const ArticleDetailPage = () => {
   const dispatch = useDispatch();
   const location = useLocation();
-  // const [articleDatas, setArticleDatas] = useState([]);
+  const [articleDatas, setArticleDatas] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [pwValue, setPwValue] = useState("");
   const [articleId, setArticleId] = useState("");
@@ -37,7 +37,7 @@ const ArticleDetailPage = () => {
 
   useEffect(() => {
     dispatch(__getArticleComment());
-    // setArticleDatas(location.state);
+    setArticleDatas(location.state);
   }, [dispatch, location]);
 
   const handlePasswordChange = (e) => setPwValue(e.target.value);
@@ -56,7 +56,7 @@ const ArticleDetailPage = () => {
       ...articleFormData,
       id: uuidv4(),
       createdDate: "2022-12-23",
-      alcoholId: "not",
+      alcoholId: articleDatas.id,
     };
     dispatch(__createArticleComment(obj));
 
@@ -96,6 +96,7 @@ const ArticleDetailPage = () => {
       <ArticleDetailHeader />
       <ArticleDetailCommentWrite
         articleFormData={articleFormData}
+        articleDatas={articleDatas}
         articleComment={articleComment}
         articleEditValue={articleEditValue}
         onFormValueChangeEvent={handleFormValueChange}
