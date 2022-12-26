@@ -103,7 +103,7 @@ const ButtonBox = styled.button`
   background-color: ${(props) => (props.outline ? "transparent" : "#333")};
   border: ${(props) => (props.outline ? "1px solid #333" : "none")};
   color: ${(props) => (props.outline ? "#333" : "#fff")};
-  font-size: 0.9rem;
+  font-size: 1rem;
   font-weight: 600;
   border-radius: 4px;
 

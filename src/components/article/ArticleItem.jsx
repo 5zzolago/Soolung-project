@@ -24,9 +24,10 @@ const StyledTitle = styled("div")(({ theme }) => ({
 }));
 
 const StyledStar = styled("div")(({ theme }) => ({
-  fontSize: "17px",
+  fontSize: "16px",
   marginTop: "2px",
   cursor: "pointer",
+  color: "#333",
 }));
 
 function GridView({ article, categories }) {

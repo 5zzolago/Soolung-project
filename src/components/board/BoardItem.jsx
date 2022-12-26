@@ -55,7 +55,7 @@ const ItemBox = styled(Box)`
 `;
 
 const Title = styled.h1`
-  font-size: 24px;
+  font-size: 26px;
   font-weight: 500;
   white-space: nowrap;
   overflow: hidden;
@@ -91,7 +91,7 @@ const ImgWrap = styled.div`
 `;
 
 const TextBody = styled.p`
-  font-size: 14px;
+  font-size: 16px;
   color: #555;
   margin: 0.2rem 2.2rem 2.4rem 0;
   padding-right: 1rem;
