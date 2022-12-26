@@ -100,10 +100,12 @@ const ArticleDetailPage = () => {
   if (error) {
     return <div>{error.message}</div>;
   }
-
   return (
     <ArticleDetailWrap>
-      <ArticleDetailHeader />
+      <ArticleDetailHeader
+        articleDatas={articleDatas}
+        articleComment={articleComment}
+      />
       <ArticleDetailCommentWrite
         articleFormData={articleFormData}
         articleDatas={articleDatas}
