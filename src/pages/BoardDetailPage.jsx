@@ -1,22 +1,32 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import wine from "../assets/wine.jpg";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 
 import BoardDetailWrite from "../components/board/BoardDetailWrite";
 
 const BoardDetailPage = () => {
+  const [postData, setPostData] = useState([]);
+  const id = useParams().boardId;
+  useEffect(() => {
+    axios.get(`http://localhost:8080/board?id=${id}`).then((response) => {
+      setPostData(response.data);
+    });
+  }, []);
+  const post = postData[0];
+
   return (
     <BoardDetailWrap>
       <BoardDetailTitleContainer>
-        <BoardDetailTitleName>제목입니다</BoardDetailTitleName>
+        <BoardDetailTitleName>{post?.title}</BoardDetailTitleName>
         <BoardDetailNameAt>
-          <BoardDetailNickName>By.모히또</BoardDetailNickName>
-          <BoardDetailCreateAt>2022-12-23</BoardDetailCreateAt>
+          <BoardDetailNickName>{post?.username}</BoardDetailNickName>
+          <BoardDetailCreateAt>{post?.createdDate}</BoardDetailCreateAt>
         </BoardDetailNameAt>
       </BoardDetailTitleContainer>
       <BoardDetailPostingContainer>
         <BoardDetailImage>
-          <img src={wine} alt="wine" height="500px" />
+          <img src={post?.img} alt="wine" height="500px" />
         </BoardDetailImage>
         <BoardDetailDesc>
           If you're the kind of person who stares at the endless shelves of wine

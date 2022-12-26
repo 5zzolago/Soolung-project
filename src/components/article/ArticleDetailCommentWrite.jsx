@@ -3,6 +3,7 @@ import TextField from "@mui/material/TextField";
 import Rating from "@mui/material/Rating";
 import ArticleDetailComment from "./ArticleDetailComment";
 import styled from "styled-components";
+import Button from "../button/Button";
 
 const ArticleDetailCommentWrite = ({
   articleDatas,
@@ -63,9 +64,7 @@ const ArticleDetailCommentWrite = ({
               value={comment}
               onChange={onFormValueChangeEvent}
             />
-            <ArticleDetailCommentBtn type="submit">
-              등록하기
-            </ArticleDetailCommentBtn>
+            <Button type={"submit"} size={"tertiary"} text={"등록하기"} />
           </ArticleDetailCommentBox>
         </ArticleDetailForm>
       </ArticleDetailContainer>
@@ -119,12 +118,4 @@ const ArticleDetailCommentBox = styled.div`
   gap: 1rem;
 `;
 
-const ArticleDetailCommentBtn = styled.button`
-  width: 15%;
-  border-radius: 0.5rem;
-  color: white;
-  background-color: #434343;
-  font-weight: bold;
-  cursor: pointer;
-`;
 export default ArticleDetailCommentWrite;
