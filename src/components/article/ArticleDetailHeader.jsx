@@ -1,13 +1,8 @@
 import styled from "styled-components";
 
-const ArticleDetailHeader = ({ articleDatas, articleComment }) => {
-  const stars = articleComment.filter(
-    (cmt) => cmt.alcoholId === articleDatas.id
-  );
-  const starCal = stars
-    .map((s) => Number(s.star))
-    ?.reduce((pre, cur) => pre + cur, 0);
-
+const ArticleDetailHeader = ({ articleDatas }) => {
+  console.log(articleDatas);
+  const { name, dsec, star, img } = articleDatas;
   const string =
     "부드럽고 맛있으며 적당한 쌀의 달콤함과 그라파의 느낌도 살짝 나타나는 신기한 소주입니다.";
   return (
@@ -22,9 +17,7 @@ const ArticleDetailHeader = ({ articleDatas, articleComment }) => {
           </ArticleDetailLeftBox>
           <ArticleDetailRightBox>
             <ArticleDetailName>토끼 소주 블랙</ArticleDetailName>
-            <ArticleDetailRank>
-              ⭐️ {(starCal / stars.length).toFixed(1)}
-            </ArticleDetailRank>
+            <ArticleDetailRank>⭐️{star}</ArticleDetailRank>
             <ArticleDetailDesc>{string}</ArticleDetailDesc>
           </ArticleDetailRightBox>
         </ArticleDetailMainBox>

@@ -7,6 +7,7 @@ import {
   __createArticleComment,
   __deleteArticleComment,
 } from "../store/modules/articleCommentSlice";
+import { __updateArticle } from "../store/modules/articleSlice";
 import { validateUsername, validateComment } from "../utils/validate";
 import { now } from "../utils/date";
 import Modal from "@mui/material/Modal";
@@ -55,11 +56,13 @@ const ArticleDetailPage = () => {
     }
 
     if (articleFormData.password.trim() === "") {
-      alert("빈 칸을 입력해주세요.");
+      alert("비밀번호를 입력해주세요.");
+      return;
     }
 
     if (!isVaildComment) {
-      alert("댓글은 50자리 미만으로 입력해주세요.");
+      alert("댓글은 1자리 이상 50자리 미만으로 입력해주세요.");
+      return;
     }
 
     const obj = {
@@ -69,6 +72,16 @@ const ArticleDetailPage = () => {
       alcoholId: articleDatas.id,
     };
     dispatch(__createArticleComment(obj));
+
+    const stars = articleComment.filter(
+      (cmt) => cmt.alcoholId === articleDatas.id
+    );
+    const totalStar = stars
+      .map((s) => Number(s.star))
+      ?.reduce((pre, cur) => pre + cur, 0);
+    const averageStar = (totalStar / stars.length).toFixed(1);
+
+    dispatch(__updateArticle([articleDatas.id, averageStar]));
 
     articleFormData.username = "";
     articleFormData.password = "";
@@ -123,27 +136,34 @@ const ArticleDetailPage = () => {
       >
         <Box sx={style}>
           <ArticleDetailModalBox>
-            <TextField
-              id="outlined-password-input"
-              label="Password"
-              type="password"
-              size="small"
-              value={pwValue}
-              onChange={handlePasswordChange}
-              autoComplete="current-password"
-            />
-            <ArticleDetailModalBtn
-              variant="outlined"
-              onClick={handleModalCheckPasswordClick}
-            >
-              확인
-            </ArticleDetailModalBtn>
-            <ArticleDetailModalBtn
-              variant="outlined"
-              onClick={handleModalClose}
-            >
-              취소
-            </ArticleDetailModalBtn>
+            <ArticleDeatilModalTextBox>
+              <ArticleDetailModalText>
+                삭제하시려면 비밀번호를 입력해주세요.
+              </ArticleDetailModalText>
+            </ArticleDeatilModalTextBox>
+            <ArticleDeatilModalBtnBox>
+              <TextField
+                id="outlined-password-input"
+                label="Password"
+                type="password"
+                size="small"
+                value={pwValue}
+                onChange={handlePasswordChange}
+                autoComplete="current-password"
+              />
+              <ArticleDetailModalBtn
+                variant="outlined"
+                onClick={handleModalCheckPasswordClick}
+              >
+                확인
+              </ArticleDetailModalBtn>
+              <ArticleDetailModalBtn
+                variant="outlined"
+                onClick={handleModalClose}
+              >
+                취소
+              </ArticleDetailModalBtn>
+            </ArticleDeatilModalBtnBox>
           </ArticleDetailModalBox>
         </Box>
       </Modal>
@@ -171,10 +191,29 @@ const ArticleDetailWrap = styled.div`
 
 const ArticleDetailModalBox = styled.div`
   width: 100%;
+  height: 100%;
   display: flex;
+  flex-direction: column;
   gap: 0.3rem;
   align-items: center;
   justify-content: center;
+`;
+
+const ArticleDeatilModalTextBox = styled.div`
+  width: 100%;
+  gap: 0.3rem;
+  margin-bottom: 0.5rem;
+`;
+
+const ArticleDetailModalText = styled.p`
+  font-weight: 100%;
+  text-align: center;
+`;
+
+const ArticleDeatilModalBtnBox = styled.div`
+  width: 100%;
+  display: flex;
+  gap: 0.3rem;
 `;
 
 const ArticleDetailModalBtn = styled.button`
