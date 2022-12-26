@@ -37,7 +37,7 @@ export const getAllBoard = createAsyncThunk(
 );
 
 const boardSlice = createSlice({
-  name: "article",
+  name: "board",
   initialState,
   reducers: {}, // reducer 액션부분 추가 하면 됨
   extraReducers: {
