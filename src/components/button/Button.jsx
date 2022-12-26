@@ -4,28 +4,28 @@ import styled from "styled-components";
 const Button = ({ type, text, size, handler }) => {
   const navigate = useNavigate();
 
-  const handleGoToBoard = () => {
+  const handleMovingToBoard = () => {
     navigate("/board");
   };
 
-  const handleGoToArticle = () => {
+  const handleMovingToArticle = () => {
     navigate("/article");
   };
 
-  const handleGoToEditor = () => {
-    navigate("/editor"); 
+  const handleMovingToEditor = () => {
+    navigate("/editor");
   };
 
   const handleClicked = (type) => {
     switch (type) {
       case "more":
-        return handleGoToBoard();
+        return handleMovingToBoard();
 
       case "editor":
-        return handleGoToEditor();
+        return handleMovingToEditor();
 
       case "article":
-        return handleGoToArticle();
+        return handleMovingToArticle();
 
       default:
         break;
