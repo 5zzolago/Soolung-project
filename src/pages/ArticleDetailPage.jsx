@@ -7,6 +7,8 @@ import {
   __createArticleComment,
   __deleteArticleComment,
 } from "../store/modules/articleCommentSlice";
+import { validateUsername, validateComment } from "../utils/validate";
+import { now } from "../utils/date";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
@@ -44,18 +46,26 @@ const ArticleDetailPage = () => {
   const handleModalClose = () => setIsOpen(false);
   const handleArticleFormSubmit = (e) => {
     e.preventDefault();
-    if (
-      articleFormData.username.trim() === "" ||
-      articleFormData.password.trim() === "" ||
-      articleFormData.comment.trim() === ""
-    ) {
-      alert("빈칸을 입력해주세요.");
+    const isVaildUsername = validateUsername(articleFormData.username);
+    const isVaildComment = validateComment(articleFormData.comment);
+
+    if (!isVaildUsername) {
+      alert("작성자명은 2글자 이상 9글자 미만으로 작성해주세요.");
       return;
     }
+
+    if (articleFormData.password.trim() === "") {
+      alert("빈 칸을 입력해주세요.");
+    }
+
+    if (!isVaildComment) {
+      alert("댓글은 50자리 미만으로 입력해주세요.");
+    }
+
     const obj = {
       ...articleFormData,
       id: uuidv4(),
-      createdDate: "2022-12-23",
+      createdDate: now(),
       alcoholId: articleDatas.id,
     };
     dispatch(__createArticleComment(obj));
