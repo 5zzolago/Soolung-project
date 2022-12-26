@@ -1,100 +1,103 @@
-import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPenToSquare, faXmark } from "@fortawesome/free-solid-svg-icons";
-import styled from "styled-components";
+// 여긴 뭘하는 페이지인지 모르겠음
+// 주석처리를 해도 변화가 없지만 혹시모르니 일단 냅두겠음
 
-const BoardDetailComment = ({ articleComment }) => {
-  const { username, comment, createdDate } = articleComment;
-  return (
-    <ArticleDetailWrap>
-      <ArticleDetailContainer>
-        <ArticleDetailMainBox>
-          <ArticleDetailUserNameBox>
-            <ArticleDetailUserName>{username}</ArticleDetailUserName>
-          </ArticleDetailUserNameBox>
-          <ArticleDetailBtnBox>
-            <ArticleDetailUpdateBtn>
-              <FontAwesomeIcon icon={faPenToSquare} />
-            </ArticleDetailUpdateBtn>
-            <ArticleDetailDeleteBtn>
-              <FontAwesomeIcon icon={faXmark} />
-            </ArticleDetailDeleteBtn>
-          </ArticleDetailBtnBox>
-        </ArticleDetailMainBox>
-        <ArticleDetailCommentBox>
-          <ArticleDetailCommentText>{comment}</ArticleDetailCommentText>
-        </ArticleDetailCommentBox>
-        <ArticleDetailCreatAtBox>
-          <ArticleDetailCreateAt>{createdDate}</ArticleDetailCreateAt>
-        </ArticleDetailCreatAtBox>
-      </ArticleDetailContainer>
-    </ArticleDetailWrap>
-  );
-};
+// import React from "react";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faPenToSquare, faXmark } from "@fortawesome/free-solid-svg-icons";
+// import styled from "styled-components";
 
-const ArticleDetailWrap = styled.div`
-  width: 100%;
-`;
+// const BoardDetailComment = ({ articleComment }) => {
+//   const { username, comment, createdDate } = articleComment;
+//   return (
+//     <ArticleDetailWrap>
+//       <ArticleDetailContainer>
+//         <ArticleDetailMainBox>
+//           <ArticleDetailUserNameBox>
+//             <ArticleDetailUserName>{username}</ArticleDetailUserName>
+//           </ArticleDetailUserNameBox>
+//           <ArticleDetailBtnBox>
+//             <ArticleDetailUpdateBtn>
+//               <FontAwesomeIcon icon={faPenToSquare} />
+//             </ArticleDetailUpdateBtn>
+//             <ArticleDetailDeleteBtn>
+//               <FontAwesomeIcon icon={faXmark} />
+//             </ArticleDetailDeleteBtn>
+//           </ArticleDetailBtnBox>
+//         </ArticleDetailMainBox>
+//         <ArticleDetailCommentBox>
+//           <ArticleDetailCommentText>{comment}</ArticleDetailCommentText>
+//         </ArticleDetailCommentBox>
+//         <ArticleDetailCreatAtBox>
+//           <ArticleDetailCreateAt>{createdDate}</ArticleDetailCreateAt>
+//         </ArticleDetailCreatAtBox>
+//       </ArticleDetailContainer>
+//     </ArticleDetailWrap>
+//   );
+// };
 
-const ArticleDetailContainer = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  margin-top: 2rem;
-  padding-bottom: 1.3rem;
-  border-bottom: solid #d3d3d3 2px;
-`;
+// const ArticleDetailWrap = styled.div`
+//   width: 100%;
+// `;
 
-const ArticleDetailMainBox = styled.div`
-  display: flex;
-  align-items: center;
-  width: 100%;
-`;
+// const ArticleDetailContainer = styled.div`
+//   width: 100%;
+//   display: flex;
+//   flex-direction: column;
+//   gap: 5px;
+//   margin-top: 2rem;
+//   padding-bottom: 1.3rem;
+//   border-bottom: solid #d3d3d3 2px;
+// `;
 
-const ArticleDetailBtnBox = styled.div`
-  width: 10%;
-`;
+// const ArticleDetailMainBox = styled.div`
+//   display: flex;
+//   align-items: center;
+//   width: 100%;
+// `;
 
-const ArticleDetailUpdateBtn = styled.button`
-  font-size: 1.5rem;
-  margin-right: 1.5rem;
-  border: 0;
-  background-color: transparent;
-`;
+// const ArticleDetailBtnBox = styled.div`
+//   width: 10%;
+// `;
 
-const ArticleDetailDeleteBtn = styled.button`
-  font-size: 1.7rem;
-  border: 0;
-  background-color: transparent;
-`;
+// const ArticleDetailUpdateBtn = styled.button`
+//   font-size: 1.5rem;
+//   margin-right: 1.5rem;
+//   border: 0;
+//   background-color: transparent;
+// `;
 
-const ArticleDetailUserNameBox = styled.div`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-`;
+// const ArticleDetailDeleteBtn = styled.button`
+//   font-size: 1.7rem;
+//   border: 0;
+//   background-color: transparent;
+// `;
 
-const ArticleDetailUserName = styled.p`
-  margin: 0;
-  font-weight: bold;
-`;
+// const ArticleDetailUserNameBox = styled.div`
+//   width: 100%;
+//   display: flex;
+//   align-items: center;
+//   gap: 1.5rem;
+// `;
 
-const ArticleDetailCommentBox = styled.div`
-  width: 100%;
-`;
+// const ArticleDetailUserName = styled.p`
+//   margin: 0;
+//   font-weight: bold;
+// `;
 
-const ArticleDetailCommentText = styled.p`
-  font-weight: 400;
-`;
+// const ArticleDetailCommentBox = styled.div`
+//   width: 100%;
+// `;
 
-const ArticleDetailCreatAtBox = styled.div`
-  width: 100%;
-`;
+// const ArticleDetailCommentText = styled.p`
+//   font-weight: 400;
+// `;
 
-const ArticleDetailCreateAt = styled.p`
-  font-weight: lighter;
-`;
+// const ArticleDetailCreatAtBox = styled.div`
+//   width: 100%;
+// `;
 
-export default BoardDetailComment;
+// const ArticleDetailCreateAt = styled.p`
+//   font-weight: lighter;
+// `;
+
+// export default BoardDetailComment;

@@ -1,14 +1,13 @@
 import Grid from "@mui/system/Unstable_Grid";
 import styled from "@mui/system/styled";
-import { padding } from '@mui/system';
 
 const Item = styled("div")(({ theme }) => ({
   backgroundColor: "#c3bdbd",
   width: "230px",
   height: "230px",
   textAlign: "center",
-  margin: '0',
-  padding: '0'
+  margin: "0",
+  padding: "0",
 }));
 
 const StyledTitle = styled("div")(({ theme }) => ({

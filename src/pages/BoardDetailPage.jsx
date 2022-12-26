@@ -1,8 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import wine from "../assets/wine.jpg";
-
-import BoardDetailWrite from "../components/board/BoardDetailWrite";
+import BoardDetailCommentWrite from "../components/board/BoardDetailCommentWrite";
 
 const BoardDetailPage = () => {
   return (
@@ -25,7 +24,7 @@ const BoardDetailPage = () => {
           you, we've compiled a list of easy-drinking wines to help you identify
           and build your wine palate.
         </BoardDetailDesc>
-        <BoardDetailWrite />
+        <BoardDetailCommentWrite />
       </BoardDetailPostingContainer>
     </BoardDetailWrap>
   );

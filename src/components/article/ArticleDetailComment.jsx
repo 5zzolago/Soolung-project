@@ -5,7 +5,7 @@ import Rating from "@mui/material/Rating";
 import styled from "styled-components";
 
 const ArticleDetailComment = ({ articleComment }) => {
-  const { id, username, comment, star, createdDate } = articleComment;
+  const { username, comment, star, createdDate } = articleComment;
   return (
     <ArticleDetailWrap>
       <ArticleDetailContainer>
