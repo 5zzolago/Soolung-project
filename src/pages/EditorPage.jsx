@@ -32,9 +32,7 @@ const EditorPage = () => {
   const fileStyle = {
     marginLeft: "820px",
   };
-  const addStyle = {
-    marginLeft: "820px",
-  };
+
   return (
     <div>
       <div>
