@@ -11,6 +11,8 @@ const GlobalStyle = createGlobalStyle`
     body{
         color: #101010;
         line-height: 1.7;
+        font-family: Pretendard, Roboto, -apple-system, BlinkMacSystemFont, "Malgun Gothic",
+    "맑은 고딕", helvetica, "Apple SD Gothic Neo", sans-serif;
     }
 
     ul{
