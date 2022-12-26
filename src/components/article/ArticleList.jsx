@@ -107,7 +107,12 @@ export default function BasicTabs({ article }) {
 
         <ButtonWrap page={"article"}>
           {currentLocation === "" ? (
-            <Button size={"primary"} type={"article"} text={"더보기"} />
+            <Button
+              size={"primary"}
+              height={"primary"}
+              btnType={"movingToArticle"}
+              text={"더보기"}
+            />
           ) : null}
         </ButtonWrap>
       </Box>

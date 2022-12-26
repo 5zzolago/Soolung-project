@@ -60,7 +60,8 @@ const BoardList = () => {
         <ButtonWrap page={!currentLocation ? "main" : "board"}>
           <Button
             size={!currentLocation ? "primary" : "secondary"}
-            type={!currentLocation ? "more" : "editor"}
+            height={"primary"}
+            btnType={!currentLocation ? "movingToBoard" : "movingToEditor"}
             text={!currentLocation ? "더보기" : "글쓰기"}
           />
         </ButtonWrap>
@@ -83,7 +84,7 @@ const BoardList = () => {
 
 export default BoardList;
 
-const ButtonWrap = styled.div`
+export const ButtonWrap = styled.div`
   display: flex;
   justify-content: ${(props) =>
     props.page === "main" ? "center" : "flex-end"};

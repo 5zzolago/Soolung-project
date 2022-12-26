@@ -8,6 +8,7 @@ import Box from "@mui/material/Box";
 import Rating from "@mui/material/Rating";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
+import Button from "../button/Button";
 
 const ArticleDetailComment = ({
   articleComment,
@@ -18,7 +19,7 @@ const ArticleDetailComment = ({
   const { id, username, comment, star, createdDate, password } = articleComment;
   const dispatch = useDispatch();
   const [isEditOpen, setIsEditOpen] = useState(false);
-  const [isEditClick, setIsEditClikc] = useState(false);
+  const [isEditClick, setIsEditClick] = useState(false);
   const [editPassword, setEditPassword] = useState("");
 
   const handleArticleUpdateToggle = () => {
@@ -32,7 +33,7 @@ const ArticleDetailComment = ({
   const handleModalCheckPasswordClick = () => {
     if (password === editPassword) {
       setIsEditOpen(false);
-      setIsEditClikc(true);
+      setIsEditClick(true);
     } else {
       alert("비밀번호가 틀렸습니다.");
       return;
@@ -42,7 +43,7 @@ const ArticleDetailComment = ({
   const handleEditFormSubmit = (e) => {
     e.preventDefault();
     dispatch(__updateArticleComment([id, articleEditValue]));
-    setIsEditClikc(false);
+    setIsEditClick(false);
   };
 
   return (
@@ -77,15 +78,14 @@ const ArticleDetailComment = ({
                 value={articleEditValue.comment}
                 onChange={onEditValueChangeEvent}
               />
-              <ArticleDetailCommentBtn type="submit">
-                등록하기
-              </ArticleDetailCommentBtn>
-              <ArticleDetailCommentBtn
+              <Button
+                btnType={"cancleEditingArticleComment"}
                 type="button"
-                onClick={() => setIsEditClikc(false)}
-              >
-                취소하기
-              </ArticleDetailCommentBtn>
+                outline={true}
+                handler={setIsEditClick}
+                text={"취소"}
+              />
+              <Button btnType={"submitArticle"} type="submit" text={"수정"} />
             </ArticleDetailForm>
           )}
         </ArticleDetailCommentBox>
@@ -109,18 +109,21 @@ const ArticleDetailComment = ({
               onChange={handleEditModalChange}
               autoComplete="current-password"
             />
-            <ArticleDetailModalBtn
-              variant="outlined"
-              onClick={handleModalCheckPasswordClick}
-            >
-              확인
-            </ArticleDetailModalBtn>
-            <ArticleDetailModalBtn
-              variant="outlined"
-              onClick={handleEditModalClose}
-            >
-              취소
-            </ArticleDetailModalBtn>
+            <Button
+              btnType={"closeEditingArticleCommentModal"}
+              size={"quaternary"}
+              outline={true}
+              handler={handleEditModalClose}
+              height={"secondary"}
+              text={"취소"}
+            />
+            <Button
+              btnType={"checkArticleCommentPassword"}
+              size={"quaternary"}
+              height={"secondary"}
+              handler={handleModalCheckPasswordClick}
+              text={"확인"}
+            />
           </ArticleDetailModalBox>
         </Box>
       </Modal>
@@ -165,15 +168,6 @@ const ArticleDetailUpdateBtn = styled.button`
   background-color: transparent;
 `;
 
-const ArticleDetailCommentBtn = styled.button`
-  width: 15%;
-  border-radius: 0.5rem;
-  color: white;
-  background-color: #434343;
-  font-weight: bold;
-  cursor: pointer;
-`;
-
 const ArticleDetailDeleteBtn = styled.button`
   font-size: 1.7rem;
   border: 0;
@@ -214,16 +208,6 @@ const ArticleDetailModalBox = styled.div`
   gap: 0.3rem;
   align-items: center;
   justify-content: center;
-`;
-
-const ArticleDetailModalBtn = styled.button`
-  width: 13%;
-  height: 2.4rem;
-  border-radius: 0.5rem;
-  color: white;
-  background-color: #434343;
-  font-weight: bold;
-  cursor: pointer;
 `;
 
 const style = {

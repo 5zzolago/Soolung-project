@@ -1,31 +1,56 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-const Button = ({ type, text, size, handler }) => {
+const Button = (props) => {
+  const { btnType, text, size, type, outline, handler, height } = props;
   const navigate = useNavigate();
 
-  const handleGoToBoard = () => {
+  const handleMovingToBoard = () => {
     navigate("/board");
   };
 
-  const handleGoToArticle = () => {
+  const handleMovingToArticle = () => {
     navigate("/article");
   };
 
-  const handleGoToEditor = () => {
-    navigate("/editor"); 
+  const handleMovingToEditor = () => {
+    navigate("/editor");
   };
 
-  const handleClicked = (type) => {
-    switch (type) {
-      case "more":
-        return handleGoToBoard();
+  const handleSetIsEditClick = () => {
+    // 아티클 댓글 수정 취소
+    handler(false);
+  };
 
-      case "editor":
-        return handleGoToEditor();
+  const handleClicked = (btnType) => {
+    switch (btnType) {
+      // 메인페이지 보드 더보기 버튼
+      case "movingToBoard":
+        return handleMovingToBoard();
 
-      case "article":
-        return handleGoToArticle();
+      // 글쓰기 버튼
+      case "movingToEditor":
+        return handleMovingToEditor();
+
+      // 메인페이지 아티클 더보기 버튼
+      case "movingToArticle":
+        return handleMovingToArticle();
+
+      // 아티클 댓글 수정 취소하기 버튼
+      case "cancleEditingArticleComment":
+        return handleSetIsEditClick();
+
+      // 아티클 댓글 수정 비밀번호 확인 버튼
+      case "checkArticleCommentPassword":
+        return handler();
+
+      // 아티클 댓글 수정 비밀번호 입력 취소 버튼
+      case "closeEditingArticleCommentModal":
+        return handler();
+
+      // 게시글 작성 페이지 등록버튼
+      case "createBoard":
+        return handler();
 
       default:
         break;
@@ -33,7 +58,14 @@ const Button = ({ type, text, size, handler }) => {
   };
 
   return (
-    <ButtonBox type={type} size={size} onClick={() => handleClicked(type)}>
+    <ButtonBox
+      type={type ? type : "button"}
+      btnType={btnType}
+      size={size}
+      height={height}
+      outline={outline ? outline : ""}
+      onClick={() => handleClicked(btnType)}
+    >
       {text}
     </ButtonBox>
   );
@@ -42,16 +74,43 @@ const Button = ({ type, text, size, handler }) => {
 export default Button;
 
 const ButtonBox = styled.button`
-  width: ${(props) => (props.size === "primary" ? "200px" : "140px")};
-  height: 46px;
-  background-color: #333;
-  color: #fff;
+  width: ${(props) => {
+    switch (props.size) {
+      case "primary":
+        return "200px";
+      case "secondary":
+        return "140px";
+      case "tertiary":
+        return "15%";
+      case "quaternary":
+        return "70px";
+      default:
+        return "100px";
+    }
+  }};
+  height: ${(props) => {
+    switch (props.height) {
+      case "primary":
+        return "46px";
+      case "secondary":
+        return "40px";
+      case "tertiary":
+        return "3.4rem";
+      default:
+        return "";
+    }
+  }};
+  background-color: ${(props) => (props.outline ? "transparent" : "#333")};
+  border: ${(props) => (props.outline ? "1px solid #333" : "none")};
+  color: ${(props) => (props.outline ? "#333" : "#fff")};
   font-size: 0.9rem;
   font-weight: 600;
   border-radius: 4px;
 
   &:hover {
-    background-color: #101010;
+    background-color: ${(props) => (props.outline ? "transparent" : "#101010")};
+    border: ${(props) => (props.outline ? "1px solid #101010" : "none")};
+    color: ${(props) => (props.outline ? "#333" : "#fff")};
   }
 
   &:disabled {
