@@ -1,7 +1,10 @@
-import React from "react";
 import styled from "styled-components";
 
-const ArticleDetailHeader = () => {
+const ArticleDetailHeader = ({ articleDatas }) => {
+  console.log(articleDatas);
+  const { name, dsec, star, img } = articleDatas;
+  const string =
+    "부드럽고 맛있으며 적당한 쌀의 달콤함과 그라파의 느낌도 살짝 나타나는 신기한 소주입니다.";
   return (
     <ArticleDetailWrap>
       <ArticleDetailContainer>
@@ -14,12 +17,8 @@ const ArticleDetailHeader = () => {
           </ArticleDetailLeftBox>
           <ArticleDetailRightBox>
             <ArticleDetailName>토끼 소주 블랙</ArticleDetailName>
-            <ArticleDetailRank>⭐️ 3.5</ArticleDetailRank>
-            <ArticleDetailDesc>
-              부드럽고 맛있으며 적당한 쌀의 달콤함과 그라파의 느낌도 살짝
-              <br />
-              나타나는 신기한 소주입니다.
-            </ArticleDetailDesc>
+            <ArticleDetailRank>⭐️{star}</ArticleDetailRank>
+            <ArticleDetailDesc>{string}</ArticleDetailDesc>
           </ArticleDetailRightBox>
         </ArticleDetailMainBox>
       </ArticleDetailContainer>
@@ -73,5 +72,11 @@ const ArticleDetailRank = styled.p`
 
 const ArticleDetailDesc = styled.p`
   font-weight: lighter;
+  display: inline-block;
+  width: 400px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
 `;
 export default ArticleDetailHeader;

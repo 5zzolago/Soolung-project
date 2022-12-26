@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { __updateArticleComment } from "../../store/modules/articleCommentSlice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { validateComment } from "../../utils/validate";
 import TextField from "@mui/material/TextField";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
@@ -38,10 +39,16 @@ const ArticleDetailComment = ({
       alert("비밀번호가 틀렸습니다.");
       return;
     }
+    articleEditValue.comment = comment;
   };
 
   const handleEditFormSubmit = (e) => {
     e.preventDefault();
+    const isVaildComment = validateComment(articleEditValue.comment);
+    if (!isVaildComment) {
+      alert("댓글은 1자리 이상 50자리 미만으로 입력해주세요.");
+      return;
+    }
     dispatch(__updateArticleComment([id, articleEditValue]));
     setIsEditClick(false);
   };
@@ -100,30 +107,37 @@ const ArticleDetailComment = ({
       >
         <Box sx={style}>
           <ArticleDetailModalBox>
-            <TextField
-              id="outlined-password-input"
-              label="Password"
-              type="password"
-              size="small"
-              value={editPassword}
-              onChange={handleEditModalChange}
-              autoComplete="current-password"
-            />
-            <Button
-              btnType={"closeEditingArticleCommentModal"}
-              size={"quaternary"}
-              outline={true}
-              handler={handleEditModalClose}
-              height={"secondary"}
-              text={"취소"}
-            />
-            <Button
-              btnType={"checkArticleCommentPassword"}
-              size={"quaternary"}
-              height={"secondary"}
-              handler={handleModalCheckPasswordClick}
-              text={"확인"}
-            />
+            <ArticleDeatilModalTextBox>
+              <ArticleDetailModalText>
+                수정하시려면 비밀번호를 입력해주세요
+              </ArticleDetailModalText>
+            </ArticleDeatilModalTextBox>
+            <ArticleDeatilModalBtnBox>
+              <TextField
+                id="outlined-password-input"
+                label="Password"
+                type="password"
+                size="small"
+                value={editPassword}
+                onChange={handleEditModalChange}
+                autoComplete="current-password"
+              />
+              <Button
+                btnType={"closeEditingArticleCommentModal"}
+                size={"quaternary"}
+                outline={true}
+                handler={handleEditModalClose}
+                height={"secondary"}
+                text={"취소"}
+              />
+              <Button
+                btnType={"checkArticleCommentPassword"}
+                size={"quaternary"}
+                height={"secondary"}
+                handler={handleModalCheckPasswordClick}
+                text={"확인"}
+              />
+            </ArticleDeatilModalBtnBox>
           </ArticleDetailModalBox>
         </Box>
       </Modal>
@@ -204,10 +218,28 @@ const ArticleDetailCreateAt = styled.p`
 
 const ArticleDetailModalBox = styled.div`
   width: 100%;
+  height: 100%;
   display: flex;
-  gap: 0.3rem;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+`;
+
+const ArticleDeatilModalTextBox = styled.div`
+  width: 100%;
+  gap: 0.3rem;
+  margin-bottom: 0.5rem;
+`;
+
+const ArticleDetailModalText = styled.p`
+  font-weight: 100%;
+  text-align: center;
+`;
+
+const ArticleDeatilModalBtnBox = styled.div`
+  width: 100%;
+  display: flex;
+  gap: 0.3rem;
 `;
 
 const style = {

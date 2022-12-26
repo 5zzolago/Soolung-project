@@ -37,8 +37,11 @@ export const __createArticleComment = createAsyncThunk(
 export const __updateArticleComment = createAsyncThunk(
   "updateArticleComment",
   async (payload, thunkAPI) => {
+    const [id, comment] = [payload[0], payload[1]];
     try {
-      await axios.patch(`http://localhost:8080/articleComment/${payload[0]}`);
+      await axios.patch(`http://localhost:8080/articleComment/${id}`, {
+        comment,
+      });
       return thunkAPI.fulfillWithValue(payload);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
