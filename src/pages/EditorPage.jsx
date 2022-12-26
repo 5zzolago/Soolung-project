@@ -1,4 +1,6 @@
 import React from "react";
+import Button from "../components/button/Button";
+import { ButtonWrap } from "../components/board/BoardList";
 
 const EditorPage = () => {
   const userNameStyle = {
@@ -51,9 +53,14 @@ const EditorPage = () => {
       <div>
         <input style={fileStyle} type="file"></input>
       </div>
-      <div>
-        <button style={addStyle}>등록</button>
-      </div>
+      <ButtonWrap>
+        <Button
+          btnType={"createBoard"}
+          size={"secondary"}
+          height={"primary"}
+          text={"등록하기"}
+        />
+      </ButtonWrap>
     </div>
   );
 };
