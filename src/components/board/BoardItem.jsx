@@ -11,7 +11,7 @@ const BoardItem = ({ item }) => {
           justifyContent: "space-between",
           alignItems: "center",
           borderBottom: 1,
-          borderColor: "#ccc",
+          borderColor: "#eee",
           py: 3,
           px: 1,
           mb: 1,
