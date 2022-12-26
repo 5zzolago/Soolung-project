@@ -19,17 +19,17 @@ export default function Banner() {
       <img
         src="https://mshanken.imgix.net/wso/Articles/2018/NS_health112817_1600.jpg"
         alt=""
-        srcset=""
+        srcSet=""
       />
       <img
         src="https://img.freepik.com/free-vector/vector-set-bottles-with-alcohol-stemware_1441-42.jpg?w=2000"
         alt=""
-        srcset=""
+        srcSet=""
       />
       <img
         src="https://images.foxtv.com/static.fox9.com/www.fox9.com/content/uploads/2022/11/1280/720/GettyImages-1238844614.jpg?ve=1&tl=1"
         alt=""
-        srcset=""
+        srcSet=""
       />
     </StyledSlider>
   );
