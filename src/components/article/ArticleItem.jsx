@@ -1,5 +1,7 @@
+import { Link, useLocation } from "react-router-dom";
 import Grid from "@mui/system/Unstable_Grid";
 import styled from "@mui/system/styled";
+import { padding } from "@mui/system";
 
 const Item = styled("div")(({ theme }) => ({
   backgroundColor: "#c3bdbd",
@@ -21,41 +23,53 @@ const StyledStar = styled("div")(({ theme }) => ({
   marginTop: "2px",
 }));
 
-function GridView() {
+function GridView({ article, categories }) {
+  const location = useLocation();
+  const currentLocation = location.pathname.slice(1);
+
   return (
     <div>
-      <Grid columns={3} rowSpacing={2} container spacing={12}>
-        <Grid xs={1}>
-          <Item>1</Item>
-          <StyledTitle>박재범과 원소주</StyledTitle>
-          <StyledStar>⭐️ 3.5</StyledStar>
+      {categories !== "all" ? (
+        <Grid columns={3} rowSpacing={2} container spacing={12}>
+          {article
+            .filter((art) => art.categories === categories)
+            .map((art) => (
+              <Grid key={art.id} xs={1}>
+                {currentLocation === "article" ? (
+                  <Link to={`${art.id}`} state={art}>
+                    <Item>{art.id}</Item>
+                  </Link>
+                ) : (
+                  <Link to={`article/${art.id}`} state={art}>
+                    <Item>{art.id}</Item>
+                  </Link>
+                )}
+                <StyledTitle>{art.title}</StyledTitle>
+                <StyledStar>⭐️ {art.star}</StyledStar>
+              </Grid>
+            ))}
         </Grid>
-        <Grid xs={1}>
-          <Item>2</Item>
-          <StyledTitle>제목</StyledTitle>
-          <StyledStar>⭐️ 3.5</StyledStar>
+      ) : (
+        <Grid columns={3} rowSpacing={2} container spacing={12}>
+          {article
+            .filter((art) => art.categories !== categories)
+            .map((art) => (
+              <Grid key={art.id} xs={1}>
+                {currentLocation === "article" ? (
+                  <Link to={`${art.id}`} state={art}>
+                    <Item>{art.id}</Item>
+                  </Link>
+                ) : (
+                  <Link to={`article/${art.id}`} state={art}>
+                    <Item>{art.id}</Item>
+                  </Link>
+                )}
+                <StyledTitle>{art.title}</StyledTitle>
+                <StyledStar>⭐️ {art.star}</StyledStar>
+              </Grid>
+            ))}
         </Grid>
-        <Grid xs={1}>
-          <Item>3</Item>
-          <StyledTitle>제목</StyledTitle>
-          <StyledStar>⭐️ 3.5</StyledStar>
-        </Grid>
-        <Grid xs={1}>
-          <Item>4</Item>
-          <StyledTitle>제목</StyledTitle>
-          <StyledStar>⭐️ 3.5</StyledStar>
-        </Grid>
-        <Grid xs={1}>
-          <Item>5</Item>
-          <StyledTitle>제목</StyledTitle>
-          <StyledStar>⭐️ 3.5</StyledStar>
-        </Grid>
-        <Grid xs={1}>
-          <Item>6</Item>
-          <StyledTitle>제목</StyledTitle>
-          <StyledStar>⭐️ 3.5</StyledStar>
-        </Grid>
-      </Grid>
+      )}
     </div>
   );
 }
