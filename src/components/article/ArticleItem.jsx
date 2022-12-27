@@ -34,7 +34,11 @@ function GridView({ article, categories }) {
   const location = useLocation();
   const currentLocation = location.pathname.slice(1);
 
-  const articleList = !currentLocation ? article.slice(0, 6) : article;
+  const articleList = !currentLocation
+    ? categories === "all"
+      ? article.slice(0, 6)
+      : article.filter((art) => art.categories === categories).slice(0, 6)
+    : article;
 
   return (
     <div>
