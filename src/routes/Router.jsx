@@ -8,19 +8,28 @@ import EditorPage from "../pages/EditorPage";
 import Footer from "../pages/Footer";
 import Header from "../pages/Header";
 import MainPage from "../pages/MainPage";
+import { Container } from "@mui/material";
+import SearchResultPage from "../pages/SearchResultPage";
+import EditPage from "../pages/EditPage";
+import ScrollTop from "../utils/scrollTop";
 
 const Router = () => {
   return (
     <BrowserRouter>
+      <ScrollTop />
       <Header />
-      <Routes>
-        <Route path="/" element={<MainPage />} />
-        <Route path="/article" element={<ArticlePage />} />
-        <Route path="/article/:articleId" element={<ArticleDetailPage />} />
-        <Route path="/board" element={<BoardPage />} />
-        <Route path="/board/:boardId" element={<BoardDetailPage />} />
-        <Route path="/editor" element={<EditorPage />} />
-      </Routes>
+      <Container maxWidth="lg">
+        <Routes>
+          <Route path="/" element={<MainPage />} />
+          <Route path="/article" element={<ArticlePage />} />
+          <Route path="/article/:articleId" element={<ArticleDetailPage />} />
+          <Route path="/board" element={<BoardPage />} />
+          <Route path="/board/:boardId" element={<BoardDetailPage />} />
+          <Route path="/editor" element={<EditorPage />} />
+          <Route path="/board/editorPage" element={<EditPage />} />
+          <Route path="/search" element={<SearchResultPage />} />
+        </Routes>
+      </Container>
       <Footer />
     </BrowserRouter>
   );
