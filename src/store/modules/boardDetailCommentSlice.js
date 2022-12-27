@@ -14,7 +14,7 @@ export const __getBoardDetailComment = createAsyncThunk(
   "getBoardDetailComment",
   async (payload, thunkAPI) => {
     try {
-      const { data } = await axios.get("http://localhost:8080/boardComments");
+      const { data } = await axios.get("https://spicy-midi-hound.glitch.me/boardComments");
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -43,7 +43,7 @@ export const __deleteDetailComment = createAsyncThunk(
   "deleteDetailComment",
   async (payload, thunkAPI) => {
     try {
-      await axios.delete(`http://localhost:8080/boardComments/${payload}`);
+      await axios.delete(`https://spicy-midi-hound.glitch.me/boardComments/${payload}`);
       return thunkAPI.fulfillWithValue(payload);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -56,7 +56,7 @@ export const __editDetailComment = createAsyncThunk(
   "editDetailComment",
   async (payload, thunkAPI) => {
     try {
-      await axios.patch(`http://localhost:8080/boardComments/${payload[0]}`);
+      await axios.patch(`https://spicy-midi-hound.glitch.me/boardComments/${payload[0]}`);
       return thunkAPI.fulfillWithValue(payload);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
