@@ -49,6 +49,32 @@ export const getAllBoard = createAsyncThunk(
   }
 );
 
+export const __updateBoard = createAsyncThunk(
+  "updateBoard",
+  async (payload, thunkAPI) => {
+    try {
+      await axios.patch(`http://localhost:8080/board/${payload[0]}`, {
+        ...payload[1],
+      });
+      return thunkAPI.fulfillWithValue(payload);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const __deleteBoard = createAsyncThunk(
+  "deleteBoard",
+  async (payload, thunkAPI) => {
+    try {
+      await axios.delete(`http://localhost:8080/board/${payload}`);
+      return thunkAPI.fulfillWithValue(payload);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
 const boardSlice = createSlice({
   name: "board",
   initialState,
@@ -68,6 +94,15 @@ const boardSlice = createSlice({
     },
     [getAllBoard.rejected]: (state, action) => {
       state.error = action.payload;
+    },
+    [__updateBoard.fulfilled]: (state, action) => {
+      const obj = state.list.map((s) => {
+        return s.id === action.payload[0] ? { ...s, ...action.payload[1] } : s;
+      });
+      state.list = obj;
+    },
+    [__deleteBoard.fulfilled]: (state, action) => {
+      state.list = state.list.filter((s) => s.id !== action.payload);
     },
   },
 });

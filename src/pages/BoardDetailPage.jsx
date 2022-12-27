@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare, faXmark } from "@fortawesome/free-solid-svg-icons";
 import BoardDetailCommentWrite from "../components/board/BoardDetailCommentWrite";
 import { now } from "../utils/date";
+import EditPage from "./EditPage";
+import { useDispatch } from "react-redux";
+import { __deleteBoard } from "../store/modules/boardSlice";
 
 const BoardDetailPage = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [postData, setPostData] = useState([]);
   const id = useParams().boardId;
   useEffect(() => {
@@ -17,7 +22,17 @@ const BoardDetailPage = () => {
         setPostData(response.data);
       });
   }, []);
+
   const post = postData[0];
+
+  const handleEditPageMove = () => {
+    navigate("/board/editorPage", { state: post.id });
+  };
+
+  const handleBoardDelete = () => {
+    dispatch(__deleteBoard(id));
+    navigate("/board");
+  };
 
   return (
     <BoardDetailWrap>
@@ -31,10 +46,14 @@ const BoardDetailPage = () => {
         </BoardDetailTitleContainer>
         <BoardEdtingBtnContainer>
           <BoardIconWrapper>
-            <FontAwesomeIcon icon={faPenToSquare} color={"#aaa"} />
+            <BoardEditButton onClick={handleEditPageMove}>
+              <FontAwesomeIcon icon={faPenToSquare} color={"#aaa"} />
+            </BoardEditButton>
           </BoardIconWrapper>
           <BoardIconWrapper>
-            <FontAwesomeIcon icon={faXmark} color={"#aaa"} />
+            <BoardDeleteButton onClick={handleBoardDelete}>
+              <FontAwesomeIcon icon={faXmark} color={"#aaa"} />
+            </BoardDeleteButton>
           </BoardIconWrapper>
         </BoardEdtingBtnContainer>
       </BoardDetailHeader>
@@ -42,9 +61,7 @@ const BoardDetailPage = () => {
         <BoardDetailImage>
           <img src={post?.img} alt="이미지" />
         </BoardDetailImage>
-        <BoardDetailDesc>
-          {post?.body}
-        </BoardDetailDesc>
+        <BoardDetailDesc>{post?.body}</BoardDetailDesc>
         <BoardDetailCommentWrite />
       </BoardDetailPostingContainer>
     </BoardDetailWrap>
@@ -119,6 +136,13 @@ const BoardDetailHeader = styled.header`
 const BoardEdtingBtnContainer = styled.div`
   display: flex;
   justify-content: space-between;
+`;
+
+const BoardEditButton = styled.button`
+  width: 100%;
+`;
+const BoardDeleteButton = styled.button`
+  width: 100%;
 `;
 
 const BoardIconWrapper = styled.div`
