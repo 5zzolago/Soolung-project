@@ -14,7 +14,9 @@ export const __getBoardDetailComment = createAsyncThunk(
   "getBoardDetailComment",
   async (payload, thunkAPI) => {
     try {
-      const { data } = await axios.get("http://localhost:8080/boardComments");
+      const { data } = await axios.get(
+        "http://localhost:8080/boardComments?_sort=createdDate&_order=DESC"
+      );
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
