@@ -56,7 +56,7 @@ export const __editDetailComment = createAsyncThunk(
   "editDetailComment",
   async (payload, thunkAPI) => {
     try {
-      await axios.patch(`https://spicy-midi-hound.glitch.me/boardComments/${payload[0]}`);
+      await axios.patch(`https://spicy-midi-hound.glitch.me/boardComments/${payload.id}`);
       return thunkAPI.fulfillWithValue(payload);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -99,13 +99,12 @@ const boardDetailCommentSlice = createSlice({
       state.error = action.payload;
     },
     [__editDetailComment.fulfilled]: (state, action) => {
-      const obj = state.boardComments.map((state) => {
-        return state.id === action.payload[0]
-          ? { ...state, onBoardComment: action.payload[1].onBoardComment }
-          : state;
+      const newComments = state.boardDetailComment.map((item) => {
+        return item.id === action.payload.id
+          ? { ...item, body: action.payload.body }
+          : item;
       });
-      state.boardComments = obj;
-      // console.log(obj);
+      state.boardDetailComment = newComments;
     },
   },
 });

@@ -36,8 +36,8 @@ const ArticleDetailPage = () => {
   const { isLoading, error, articleComment } = useSelector(
     (state) => state.articleComment
   );
-  const [articleFormData, handleFormValueChange] = useForm(initialState);
-  const [articleEditValue, handleEditValueChange] = useForm({ comment: "" });
+  const [articleFormData, , handleFormValueChange] = useForm(initialState);
+  const [articleEditValue, , handleEditValueChange] = useForm({ comment: "" });
 
   useEffect(() => {
     dispatch(__getArticleComment());
@@ -46,6 +46,20 @@ const ArticleDetailPage = () => {
 
   const handlePasswordChange = (e) => setPwValue(e.target.value);
   const handleModalClose = () => setIsOpen(false);
+
+  useEffect(() => {
+    const stars = articleComment.filter(
+      (cmt) => cmt.alcoholId === articleDatas.id
+    );
+    const totalStar = stars
+      .map((s) => Number(s.star))
+      ?.reduce((pre, cur) => pre + cur, 0);
+    const averageStar = totalStar / stars.length;
+    dispatch(
+      __updateArticle([articleDatas.id, Number(averageStar).toFixed(1)])
+    );
+  }, [articleComment]);
+
   const handleArticleFormSubmit = async (e) => {
     e.preventDefault();
     const isVaildUsername = validateUsername(articleFormData.username);
@@ -72,17 +86,7 @@ const ArticleDetailPage = () => {
       createdDate: now(),
       alcoholId: articleDatas.id,
     };
-    dispatch(__createArticleComment(obj)).then(() => {
-      const stars = articleComment.filter(
-        (cmt) => cmt.alcoholId === articleDatas.id
-      );
-      console.log("components:", stars);
-      const totalStar = stars
-        .map((s) => Number(s.star))
-        ?.reduce((pre, cur) => pre + cur, 0);
-      const averageStar = (totalStar / stars.length).toFixed(1);
-      dispatch(__updateArticle([articleDatas.id, Number(averageStar)]));
-    });
+    dispatch(__createArticleComment(obj));
 
     articleFormData.username = "";
     articleFormData.password = "";
@@ -99,7 +103,6 @@ const ArticleDetailPage = () => {
   const handleModalCheckPasswordClick = () => {
     const res = articleComment.filter((item) => item.password === pwValue);
     if (res.length > 0) {
-      // 비밀번호 일치하는지 찾는 거 
       dispatch(__deleteArticleComment(articleId));
       setPwValue("");
       setIsOpen(false);
