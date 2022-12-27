@@ -16,7 +16,7 @@ const ArticleDetailHeader = ({ articleDatas }) => {
           </ArticleDetailLeftBox>
           <ArticleDetailRightBox>
             <ArticleDetailName>토끼 소주 블랙</ArticleDetailName>
-            <ArticleDetailRank>⭐️{Number(star).toFixed(1)}</ArticleDetailRank>
+            <ArticleDetailRank>⭐️ {Number(star).toFixed(1)}</ArticleDetailRank>
             <ArticleDetailDesc>{string}</ArticleDetailDesc>
           </ArticleDetailRightBox>
         </ArticleDetailMainBox>
@@ -70,7 +70,8 @@ const ArticleDetailRank = styled.p`
 `;
 
 const ArticleDetailDesc = styled.p`
-  font-weight: lighter;
+  margin-top: 1rem;
+  color: #777;
   display: inline-block;
   width: 400px;
   white-space: nowrap;
