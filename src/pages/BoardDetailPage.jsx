@@ -5,6 +5,7 @@ import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare, faXmark } from "@fortawesome/free-solid-svg-icons";
 import BoardDetailCommentWrite from "../components/board/BoardDetailCommentWrite";
+import { now } from "../utils/date";
 
 const BoardDetailPage = () => {
   const [postData, setPostData] = useState([]);
@@ -25,7 +26,7 @@ const BoardDetailPage = () => {
           <BoardDetailTitleName>{post?.title}</BoardDetailTitleName>
           <BoardDetailNameAt>
             <BoardDetailNickName>by. {post?.username}</BoardDetailNickName>
-            <BoardDetailCreateAt>{post?.createdDate}</BoardDetailCreateAt>
+            <BoardDetailCreateAt>{now(post?.createdDate)}</BoardDetailCreateAt>
           </BoardDetailNameAt>
         </BoardDetailTitleContainer>
         <BoardEdtingBtnContainer>
