@@ -42,13 +42,17 @@ const BoardDetailCommentWrite = ({ postData }) => {
 
     const newboardDetailComment = {
       id: uuidv4(),
-      nickname,
-      commentPassword,
-      onBoardComment,
+      username: nickname,
+      password: commentPassword,
+      body: onBoardComment,
       boardId,
+      createdDate: Date.now(),
     };
 
     dispatch(__BoardDetailComment(newboardDetailComment));
+    setNickname("");
+    setOnBoardComment("");
+    setcommentPassword("");
   };
 
   return (
@@ -68,6 +72,7 @@ const BoardDetailCommentWrite = ({ postData }) => {
                 variant="outlined"
                 size="small"
                 sx={{ width: { sm: 280 } }}
+                value={nickname}
                 onChange={handleNicknameInputChange}
               />
               <TextField
