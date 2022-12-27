@@ -7,6 +7,17 @@ const initialState = {
   comments: [],
   error: null,
 };
+export const addBoard = createAsyncThunk(
+  "addBoard",
+  async (payload, thunkAPI) => {
+    try {
+      const response = await axios.post(`http://localhost:8080/board`, payload);
+      return thunkAPI.fulfillWithValue(response.data);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
 
 export const getBoard = createAsyncThunk(
   "getBoard",
@@ -43,6 +54,9 @@ const boardSlice = createSlice({
   extraReducers: {
     [getBoard.fulfilled]: (state, action) => {
       state.list = action.payload;
+    },
+    [addBoard.fulfilled]: (state, action) => {
+      state.list = [...state.list, action.payload];
     },
     [getBoard.rejected]: (state, action) => {
       state.error = action.payload;
