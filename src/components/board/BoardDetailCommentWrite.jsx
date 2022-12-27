@@ -1,19 +1,35 @@
-import React from "react";
+// 댓글 쓰는 페이지
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useState } from "react";
 import BoardDetailCommentListBox from "./BoardDetailCommentListBox";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
+
+import {
+  __BoardDetailComment,
+  __getBoardDetailComment,
+} from "../../store/modules/boardDetailCommentSlice";
+import { useParams } from "react-router-dom";
+
+const BoardDetailCommentWrite = ({ postData }) => {
+  const boardDetailComment = useSelector(
+    (state) => state.boardDetailCommentSlice.boardDetailComment
+  );
 import { TextField } from "@mui/material";
 import Button from "../button/Button";
-import { __BoardDetailComment } from "../../store/modules/boardDetailCommentSlice";
 
-const BoardDetailCommentWrite = () => {
+
+  const boardId = useParams().boardId;
+  const dispatch = useDispatch();
   const [nickname, setNickname] = useState("");
   const [commentPassword, setcommentPassword] = useState("");
   const [onBoardComment, setOnBoardComment] = useState("");
 
-  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(__getBoardDetailComment());
+  }, [dispatch]);
+
   const handleNicknameInputChange = (event) => {
     setNickname(event.target.value);
   };
@@ -28,9 +44,10 @@ const BoardDetailCommentWrite = () => {
 
     const newboardDetailComment = {
       id: uuidv4(),
-      nickname: nickname,
-      commentPassword: commentPassword,
-      onBoardComment: onBoardComment,
+      nickname,
+      commentPassword,
+      onBoardComment,
+      boardId,
     };
 
     dispatch(__BoardDetailComment(newboardDetailComment));
@@ -85,7 +102,12 @@ const BoardDetailCommentWrite = () => {
         </BoardDetailContainer>
       </BoardDetailCommentWrap>
       <BoardDetailCommentListWrap>
-        <BoardDetailCommentListBox />
+        <BoardDetailCommentListBox
+          boardId={boardId}
+          postData={postData}
+          boardDetailComment={boardDetailComment}
+          commentPassword={commentPassword}
+        />
       </BoardDetailCommentListWrap>
     </BoardDetailCommentWriteListAll>
   );

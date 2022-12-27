@@ -62,7 +62,9 @@ const BoardDetailPage = () => {
           <img src={post?.img} alt="이미지" />
         </BoardDetailImage>
         <BoardDetailDesc>{post?.body}</BoardDetailDesc>
-        <BoardDetailCommentWrite />
+
+        <BoardDetailCommentWrite boardId={id} postData={postData} />
+
       </BoardDetailPostingContainer>
     </BoardDetailWrap>
   );
@@ -78,6 +80,10 @@ const BoardDetailTitleContainer = styled.div`
 `;
 
 const BoardDetailTitleName = styled.h1`
+  font-weight: bold;
+  text-align: left;
+  margin-top: 4rem;
+
   color: #101010;
   white-space: nowrap;
   overflow: hidden;
