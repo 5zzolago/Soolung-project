@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 const ArticleDetailHeader = ({ articleDatas }) => {
-  console.log(articleDatas);
   const { name, dsec, star, img } = articleDatas;
   const string =
     "부드럽고 맛있으며 적당한 쌀의 달콤함과 그라파의 느낌도 살짝 나타나는 신기한 소주입니다.";
@@ -17,7 +16,7 @@ const ArticleDetailHeader = ({ articleDatas }) => {
           </ArticleDetailLeftBox>
           <ArticleDetailRightBox>
             <ArticleDetailName>토끼 소주 블랙</ArticleDetailName>
-            <ArticleDetailRank>⭐️{star}</ArticleDetailRank>
+            <ArticleDetailRank>⭐️{Number(star).toFixed(1)}</ArticleDetailRank>
             <ArticleDetailDesc>{string}</ArticleDetailDesc>
           </ArticleDetailRightBox>
         </ArticleDetailMainBox>

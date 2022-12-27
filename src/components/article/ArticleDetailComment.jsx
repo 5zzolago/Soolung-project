@@ -25,6 +25,7 @@ const ArticleDetailComment = ({
 
   const handleArticleUpdateToggle = () => {
     setIsEditOpen(true);
+    setEditPassword("");
     articleEditValue.comment = "";
   };
 
@@ -63,10 +64,10 @@ const ArticleDetailComment = ({
           </ArticleDetailUserNameBox>
           <ArticleDetailBtnBox>
             <ArticleDetailUpdateBtn onClick={handleArticleUpdateToggle}>
-              <FontAwesomeIcon icon={faPenToSquare} />
+              <FontAwesomeIcon icon={faPenToSquare} color={"#aaa"} />
             </ArticleDetailUpdateBtn>
             <ArticleDetailDeleteBtn onClick={onCommentDeleteEvent(id)}>
-              <FontAwesomeIcon icon={faXmark} />
+              <FontAwesomeIcon icon={faXmark} color={"#aaa"} />
             </ArticleDetailDeleteBtn>
           </ArticleDetailBtnBox>
         </ArticleDetailMainBox>
@@ -239,6 +240,8 @@ const ArticleDetailModalText = styled.p`
 const ArticleDeatilModalBtnBox = styled.div`
   width: 100%;
   display: flex;
+  align-items: center;
+  justify-content: center;
   gap: 0.3rem;
 `;
 
