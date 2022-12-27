@@ -99,6 +99,7 @@ const ArticleDetailPage = () => {
   const handleModalCheckPasswordClick = () => {
     const res = articleComment.filter((item) => item.password === pwValue);
     if (res.length > 0) {
+      // 비밀번호 일치하는지 찾는 거 
       dispatch(__deleteArticleComment(articleId));
       setPwValue("");
       setIsOpen(false);
