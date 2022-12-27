@@ -5,7 +5,8 @@ import { useState } from "react";
 import BoardDetailCommentListBox from "./BoardDetailCommentListBox";
 import { useDispatch, useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
-
+import { TextField } from "@mui/material";
+import Button from "../button/Button";
 import {
   __BoardDetailComment,
   __getBoardDetailComment,
@@ -16,9 +17,6 @@ const BoardDetailCommentWrite = ({ postData }) => {
   const boardDetailComment = useSelector(
     (state) => state.boardDetailCommentSlice.boardDetailComment
   );
-import { TextField } from "@mui/material";
-import Button from "../button/Button";
-
 
   const boardId = useParams().boardId;
   const dispatch = useDispatch();
@@ -44,13 +42,17 @@ import Button from "../button/Button";
 
     const newboardDetailComment = {
       id: uuidv4(),
-      nickname,
-      commentPassword,
-      onBoardComment,
+      username: nickname,
+      password: commentPassword,
+      body: onBoardComment,
       boardId,
+      createdDate: Date.now(),
     };
 
     dispatch(__BoardDetailComment(newboardDetailComment));
+    setNickname("");
+    setOnBoardComment("");
+    setcommentPassword("");
   };
 
   return (
@@ -70,6 +72,7 @@ import Button from "../button/Button";
                 variant="outlined"
                 size="small"
                 sx={{ width: { sm: 280 } }}
+                value={nickname}
                 onChange={handleNicknameInputChange}
               />
               <TextField
