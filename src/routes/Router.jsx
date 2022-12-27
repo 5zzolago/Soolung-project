@@ -11,10 +11,12 @@ import MainPage from "../pages/MainPage";
 import { Container } from "@mui/material";
 import SearchResultPage from "../pages/SearchResultPage";
 import EditPage from "../pages/EditPage";
+import ScrollTop from "../utils/scrollTop";
 
 const Router = () => {
   return (
     <BrowserRouter>
+      <ScrollTop />
       <Header />
       <Container maxWidth="lg">
         <Routes>

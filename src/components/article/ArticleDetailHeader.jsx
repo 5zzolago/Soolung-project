@@ -1,7 +1,14 @@
 import styled from "styled-components";
 
-const ArticleDetailHeader = ({ articleDatas }) => {
-  const { name, desc, star, img } = articleDatas;
+const ArticleDetailHeader = ({ articleDatas, articleComment }) => {
+  const { name, desc, img } = articleDatas;
+
+  const stars = articleComment.filter(
+    (cmt) => cmt.alcoholId === articleDatas.id
+  );
+  const totalStar = stars
+    .map((s) => Number(s.star))
+    ?.reduce((pre, cur) => pre + cur, 0);
 
   return (
     <ArticleDetailWrap>
@@ -12,7 +19,9 @@ const ArticleDetailHeader = ({ articleDatas }) => {
           </ArticleDetailLeftBox>
           <ArticleDetailRightBox>
             <ArticleDetailName>{name}</ArticleDetailName>
-            <ArticleDetailRank>⭐️ {Number(star).toFixed(1)}</ArticleDetailRank>
+            <ArticleDetailRank>
+              ⭐️ {Number(totalStar / stars.length).toFixed(1)}
+            </ArticleDetailRank>
             <ArticleDetailDesc>{desc}</ArticleDetailDesc>
           </ArticleDetailRightBox>
         </ArticleDetailMainBox>
