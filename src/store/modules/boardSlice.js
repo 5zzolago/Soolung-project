@@ -13,7 +13,7 @@ export const getBoard = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const response = await axios.get(
-        `http://localhost:8080/board?_sort=createdDate&_order=DESC&_limit=5`
+        `${process.env.REACT_APP_API_URL}/board?_sort=createdDate&_order=DESC&_limit=5`
       );
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
@@ -27,7 +27,7 @@ export const getAllBoard = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const response = await axios.get(
-        `http://localhost:8080/board?_sort=createdDate&_order=DESC`
+        `${process.env.REACT_APP_API_URL}/board?_sort=createdDate&_order=DESC`
       );
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {

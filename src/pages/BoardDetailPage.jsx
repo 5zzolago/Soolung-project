@@ -10,9 +10,11 @@ const BoardDetailPage = () => {
   const [postData, setPostData] = useState([]);
   const id = useParams().boardId;
   useEffect(() => {
-    axios.get(`http://localhost:8080/board?id=${id}`).then((response) => {
-      setPostData(response.data);
-    });
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/board?id=${id}`)
+      .then((response) => {
+        setPostData(response.data);
+      });
   }, []);
   const post = postData[0];
 
