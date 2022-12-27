@@ -5,14 +5,17 @@ import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare, faXmark } from "@fortawesome/free-solid-svg-icons";
 import BoardDetailCommentWrite from "../components/board/BoardDetailCommentWrite";
+import { now } from "../utils/date";
 
 const BoardDetailPage = () => {
   const [postData, setPostData] = useState([]);
   const id = useParams().boardId;
   useEffect(() => {
-    axios.get(`http://localhost:8080/board?id=${id}`).then((response) => {
-      setPostData(response.data);
-    });
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/board?id=${id}`)
+      .then((response) => {
+        setPostData(response.data);
+      });
   }, []);
   const post = postData[0];
 
@@ -23,7 +26,7 @@ const BoardDetailPage = () => {
           <BoardDetailTitleName>{post?.title}</BoardDetailTitleName>
           <BoardDetailNameAt>
             <BoardDetailNickName>by. {post?.username}</BoardDetailNickName>
-            <BoardDetailCreateAt>{post?.createdDate}</BoardDetailCreateAt>
+            <BoardDetailCreateAt>{now(post?.createdDate)}</BoardDetailCreateAt>
           </BoardDetailNameAt>
         </BoardDetailTitleContainer>
         <BoardEdtingBtnContainer>
@@ -102,6 +105,7 @@ const BoardDetailDesc = styled.p`
   color: #555;
   font-size: 1.1rem;
   margin: 4rem 0 8rem;
+  padding: 0 5rem;
 `;
 
 const BoardDetailHeader = styled.header`

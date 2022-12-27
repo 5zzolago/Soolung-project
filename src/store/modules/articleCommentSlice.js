@@ -11,7 +11,9 @@ export const __getArticleComment = createAsyncThunk(
   "getArticleComment",
   async (payload, thunkAPI) => {
     try {
-      const { data } = await axios.get("http://localhost:8080/articleComment");
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_API_URL}/articleComment`
+      );
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -24,7 +26,7 @@ export const __createArticleComment = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const { data } = await axios.post(
-        "http://localhost:8080/articleComment",
+        `${process.env.REACT_APP_API_URL}/articleComment`,
         payload
       );
       return thunkAPI.fulfillWithValue(data);
@@ -53,7 +55,9 @@ export const __deleteArticleComment = createAsyncThunk(
   "deleteArticleComment",
   async (payload, thunkAPI) => {
     try {
-      await axios.delete(`http://localhost:8080/articleComment/${payload}`);
+      await axios.delete(
+        `${process.env.REACT_APP_API_URL}/articleComment/${payload}`
+      );
       return thunkAPI.fulfillWithValue(payload);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);

@@ -11,7 +11,9 @@ export const __getArticle = createAsyncThunk(
   "getArticle",
   async (payload, thunkAPI) => {
     try {
-      const { data } = await axios.get("http://localhost:8080/article");
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_API_URL}/article`
+      );
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -24,7 +26,9 @@ export const __updateArticle = createAsyncThunk(
   async (payload, thunkAPI) => {
     const [id, star] = [payload[0], payload[1]];
     try {
-      await axios.patch(`http://localhost:8080/article/${id}`, { star });
+      await axios.patch(`${process.env.REACT_APP_API_URL}/article/${id}`, {
+        star,
+      });
       return thunkAPI.fulfillWithValue(payload);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
