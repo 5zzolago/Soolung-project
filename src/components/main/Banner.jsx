@@ -1,41 +1,45 @@
+import { Link } from "react-router-dom";
 import Slider from "react-slick";
 import styled from "styled-components";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import soolungBnr1 from "../../assets/soolung-bnr-1.jpg";
+import soolungBnr2 from "../../assets/soolung-bnr-2.jpg";
+import soolungBnr3 from "../../assets/soolung-bnr-3.jpg";
 
 export default function Banner() {
   const settings = {
     dots: true,
     lazyLoad: true,
     infinite: true,
-    speed: 800,
+    speed: 1000,
     slidesToShow: 1,
     slidesToScroll: 1,
-    initialSlide: 2,
+    initialSlide: 1,
     autoplay: 1000,
   };
   return (
     <StyledSlider {...settings}>
-      <img
-        src="https://mshanken.imgix.net/wso/Articles/2018/NS_health112817_1600.jpg"
-        alt=""
-        srcSet=""
-      />
-      <img
-        src="https://img.freepik.com/free-vector/vector-set-bottles-with-alcohol-stemware_1441-42.jpg?w=2000"
-        alt=""
-        srcSet=""
-      />
-      <img
-        src="https://images.foxtv.com/static.fox9.com/www.fox9.com/content/uploads/2022/11/1280/720/GettyImages-1238844614.jpg?ve=1&tl=1"
-        alt=""
-        srcSet=""
-      />
+      <Link>
+        <img src={soolungBnr1} alt="배너1" srcSet="" />
+      </Link>
+      <Link to={"/editor"}>
+        <img src={soolungBnr2} alt="배너2" srcSet="" />
+      </Link>
+      <Link>
+        <img src={soolungBnr3} alt="배너3" srcSet="" />
+      </Link>
     </StyledSlider>
   );
 }
 
 const StyledSlider = styled(Slider)`
+  height: 440px;
+
+  img {
+    cursor: pointer;
+  }
+
   .slick-dots {
     display: flex;
     width: 100px;
