@@ -46,6 +46,7 @@ export const __updateArticleComment = createAsyncThunk(
   }
 );
 
+// 삭제
 export const __deleteArticleComment = createAsyncThunk(
   "deleteArticleComment",
   async (payload, thunkAPI) => {
