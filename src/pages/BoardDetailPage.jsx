@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-
 import BoardDetailWrite from "../components/board/BoardDetailWrite";
 
 const BoardDetailPage = () => {
@@ -28,13 +27,7 @@ const BoardDetailPage = () => {
         <BoardDetailImage>
           <img src={post?.img} alt="wine" height="500px" />
         </BoardDetailImage>
-        <BoardDetailDesc>
-          If you're the kind of person who stares at the endless shelves of wine
-          before choosing a bottle because it has an attractive label, then you
-          might need some help picking out wine. To make it a little easier for
-          you, we've compiled a list of easy-drinking wines to help you identify
-          and build your wine palate.
-        </BoardDetailDesc>
+        <BoardDetailDesc>{post?.body}</BoardDetailDesc>
         <BoardDetailWrite />
       </BoardDetailPostingContainer>
     </BoardDetailWrap>

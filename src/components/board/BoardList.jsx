@@ -7,6 +7,7 @@ import Button from "../button/Button";
 import BoardItem from "./BoardItem";
 import NoContent from "../error/NoContent";
 import { getBoard, getAllBoard } from "../../store/modules/boardSlice";
+import BoardSerach from "./BoardSearch";
 
 const BoardList = () => {
   const board = useSelector((state) => state.boardSlice.list);
@@ -78,6 +79,7 @@ const BoardList = () => {
           )}
         </PaginationWrap>
       )}
+      {currentLocation === "board" ? <BoardSerach /> : null}
     </Section>
   );
 };

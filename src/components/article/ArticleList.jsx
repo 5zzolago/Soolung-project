@@ -8,6 +8,7 @@ import GridView from "./ArticleItem";
 import Button from "../button/Button";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const StyledH4 = styled.div`
   font-size: 30px;
@@ -74,7 +75,19 @@ export default function BasicTabs({ article }) {
   return (
     <Wrap>
       <Box sx={{ width: "100%" }}>
-        <StyledH4>Article</StyledH4>
+        {/* <StyledH4>Article</StyledH4> */}
+        <Typography
+          variant="h1"
+          sx={{
+            fontSize: 36,
+            fontWeight: 700,
+            my: 2,
+            paddingLeft: 1,
+            marginTop: 10,
+          }}
+        >
+          <Link to={"/article"}>Article</Link>
+        </Typography>
         <Box sx={{ borderBottom: 1, borderColor: "black" }}>
           <Tabs
             value={value}
