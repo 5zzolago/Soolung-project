@@ -46,7 +46,7 @@ const ArticleDetailPage = () => {
 
   const handlePasswordChange = (e) => setPwValue(e.target.value);
   const handleModalClose = () => setIsOpen(false);
-  const handleArticleFormSubmit = (e) => {
+  const handleArticleFormSubmit = async (e) => {
     e.preventDefault();
     const isVaildUsername = validateUsername(articleFormData.username);
     const isVaildComment = validateComment(articleFormData.comment);
@@ -72,17 +72,17 @@ const ArticleDetailPage = () => {
       createdDate: now(),
       alcoholId: articleDatas.id,
     };
-    dispatch(__createArticleComment(obj));
-
-    const stars = articleComment.filter(
-      (cmt) => cmt.alcoholId === articleDatas.id
-    );
-    const totalStar = stars
-      .map((s) => Number(s.star))
-      ?.reduce((pre, cur) => pre + cur, 0);
-    const averageStar = (totalStar / stars.length).toFixed(1);
-
-    dispatch(__updateArticle([articleDatas.id, averageStar]));
+    dispatch(__createArticleComment(obj)).then(() => {
+      const stars = articleComment.filter(
+        (cmt) => cmt.alcoholId === articleDatas.id
+      );
+      console.log("components:", stars);
+      const totalStar = stars
+        .map((s) => Number(s.star))
+        ?.reduce((pre, cur) => pre + cur, 0);
+      const averageStar = (totalStar / stars.length).toFixed(1);
+      dispatch(__updateArticle([articleDatas.id, Number(averageStar)]));
+    });
 
     articleFormData.username = "";
     articleFormData.password = "";

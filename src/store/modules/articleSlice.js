@@ -55,7 +55,7 @@ const articleSlice = createSlice({
     [__updateArticle.fulfilled]: (state, action) => {
       const obj = state.article.map((s) => {
         return s.id === action.payload[0]
-          ? { ...s, star: action.payload[1] }
+          ? { ...s, star: Number(action.payload[1]) }
           : s;
       });
       state.article = obj;
