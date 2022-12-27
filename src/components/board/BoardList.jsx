@@ -7,6 +7,7 @@ import Button from "../button/Button";
 import BoardItem from "./BoardItem";
 import NoContent from "../error/NoContent";
 import { getBoard, getAllBoard } from "../../store/modules/boardSlice";
+import BoardSerach from "./BoardSearch";
 
 const BoardList = () => {
   const board = useSelector((state) => state.boardSlice.list);
@@ -60,7 +61,8 @@ const BoardList = () => {
         <ButtonWrap page={!currentLocation ? "main" : "board"}>
           <Button
             size={!currentLocation ? "primary" : "secondary"}
-            type={!currentLocation ? "more" : "editor"}
+            height={"primary"}
+            btnType={!currentLocation ? "movingToBoard" : "movingToEditor"}
             text={!currentLocation ? "더보기" : "글쓰기"}
           />
         </ButtonWrap>
@@ -77,13 +79,14 @@ const BoardList = () => {
           )}
         </PaginationWrap>
       )}
+      {currentLocation === "board" ? <BoardSerach /> : null}
     </Section>
   );
 };
 
 export default BoardList;
 
-const ButtonWrap = styled.div`
+export const ButtonWrap = styled.div`
   display: flex;
   justify-content: ${(props) =>
     props.page === "main" ? "center" : "flex-end"};
