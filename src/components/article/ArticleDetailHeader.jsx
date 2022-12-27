@@ -1,23 +1,19 @@
 import styled from "styled-components";
 
 const ArticleDetailHeader = ({ articleDatas }) => {
-  const { name, dsec, star, img } = articleDatas;
-  const string =
-    "부드럽고 맛있으며 적당한 쌀의 달콤함과 그라파의 느낌도 살짝 나타나는 신기한 소주입니다.";
+  const { name, desc, star, img } = articleDatas;
+
   return (
     <ArticleDetailWrap>
       <ArticleDetailContainer>
         <ArticleDetailMainBox>
           <ArticleDetailLeftBox>
-            <ArticleDetailImage
-              src={`${process.env.PUBLIC_URL}/articleImg/soju.png`}
-              alt="토끼 소주 블랙"
-            />
+            <ArticleDetailImage src={img} alt={name} />
           </ArticleDetailLeftBox>
           <ArticleDetailRightBox>
-            <ArticleDetailName>토끼 소주 블랙</ArticleDetailName>
+            <ArticleDetailName>{name}</ArticleDetailName>
             <ArticleDetailRank>⭐️ {Number(star).toFixed(1)}</ArticleDetailRank>
-            <ArticleDetailDesc>{string}</ArticleDetailDesc>
+            <ArticleDetailDesc>{desc}</ArticleDetailDesc>
           </ArticleDetailRightBox>
         </ArticleDetailMainBox>
       </ArticleDetailContainer>
@@ -78,5 +74,6 @@ const ArticleDetailDesc = styled.p`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: normal;
+  margin-top: 1rem;
 `;
 export default ArticleDetailHeader;
