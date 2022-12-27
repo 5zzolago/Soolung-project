@@ -34,11 +34,13 @@ function GridView({ article, categories }) {
   const location = useLocation();
   const currentLocation = location.pathname.slice(1);
 
+  const articleList = !currentLocation ? article.slice(0, 6) : article;
+
   return (
     <div>
       {categories !== "all" ? (
         <Grid columns={3} rowSpacing={2} container spacing={12}>
-          {article
+          {articleList
             .filter((art) => art.categories === categories)
             .map((art) => (
               <Grid key={art.id} xs={1}>
@@ -62,7 +64,7 @@ function GridView({ article, categories }) {
         </Grid>
       ) : (
         <Grid columns={3} rowSpacing={2} container spacing={12}>
-          {article
+          {articleList
             .filter((art) => art.categories !== categories)
             .map((art) => (
               <Grid key={art.id} xs={1}>

@@ -12,7 +12,7 @@ const ArticleDetailHeader = ({ articleDatas }) => {
           </ArticleDetailLeftBox>
           <ArticleDetailRightBox>
             <ArticleDetailName>{name}</ArticleDetailName>
-            <ArticleDetailRank>⭐️{Number(star).toFixed(1)}</ArticleDetailRank>
+            <ArticleDetailRank>⭐️ {Number(star).toFixed(1)}</ArticleDetailRank>
             <ArticleDetailDesc>{desc}</ArticleDetailDesc>
           </ArticleDetailRightBox>
         </ArticleDetailMainBox>
@@ -66,7 +66,8 @@ const ArticleDetailRank = styled.p`
 `;
 
 const ArticleDetailDesc = styled.p`
-  font-weight: lighter;
+  margin-top: 1rem;
+  color: #777;
   display: inline-block;
   width: 400px;
   white-space: nowrap;

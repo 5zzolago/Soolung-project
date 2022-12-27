@@ -4,14 +4,16 @@ import axios from "axios";
 
 const initialState = {
   list: [],
-  comments: [],
   error: null,
 };
 export const addBoard = createAsyncThunk(
   "addBoard",
   async (payload, thunkAPI) => {
     try {
-      const response = await axios.post(`http://localhost:8080/board`, payload);
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_URL}/board`,
+        payload
+      );
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);

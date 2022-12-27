@@ -60,10 +60,6 @@ const Button = (props) => {
       case "closeEditingArticleCommentModal":
         return handler();
 
-      // 게시글 작성 페이지 등록버튼
-      case "createBoard":
-        return handler();
-
       default:
         break;
     }
