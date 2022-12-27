@@ -25,6 +25,7 @@ const ArticleDetailComment = ({
 
   const handleArticleUpdateToggle = () => {
     setIsEditOpen(true);
+    setEditPassword("");
     articleEditValue.comment = "";
   };
 
@@ -239,6 +240,8 @@ const ArticleDetailModalText = styled.p`
 const ArticleDeatilModalBtnBox = styled.div`
   width: 100%;
   display: flex;
+  align-items: center;
+  justify-content: center;
   gap: 0.3rem;
 `;
 
