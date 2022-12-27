@@ -19,7 +19,9 @@ const SearchResultPage = () => {
           marginTop: 5,
         }}
       >
-        {`${result.length}개의 게시물을 찾았어요 🔍`}
+        {result.length === 0
+          ? "결과가 없어요 :("
+          : `${result.length}개의 게시물을 찾았어요 🔍`}
       </Typography>
       <ResultSection>
         {result.map((item) => (

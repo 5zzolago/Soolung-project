@@ -1,64 +1,43 @@
-// TodoList.jsx 같은 역할
-// 댓글삭제 누르는 곳
-
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import Modal from "@mui/material/Modal";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
+
 import { __deleteDetailComment } from "../../store/modules/boardDetailCommentSlice";
 import BoardDetailCommentItem from "./BoardDetailCommentItem";
+import NoContent from "../error/NoContent";
 
 function BoardDetailCommentListBox({ boardId, boardDetailComment }) {
   const dispatch = useDispatch();
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-
-  const [BoardModalPwValue, setBoardModalPwValue] = useState("");
-
-  const handleBoardModalPwChange = (e) => setBoardModalPwValue(e.target.value);
-
   const handleModalDeleteClick = (id) => {
     dispatch(__deleteDetailComment);
+  };
+
+  const handleBoardCommentList = () => {
+    const currentBoardComments = boardDetailComment.filter(
+      (item) => boardId === item.boardId
+    );
+    return currentBoardComments.length === 0 ? (
+      <NoContent />
+    ) : (
+      boardDetailComment
+        .filter((item) => {
+          return boardId === item.boardId;
+        })
+        .map((item) => (
+          <BoardDetailCommentItem
+            key={item.id}
+            boardComment={item}
+            onCommentDelete={handleModalDeleteClick}
+          />
+        ))
+    );
   };
 
   return (
     <StyledCommentListContainer>
       {/* // 댓글 삭제 눌렀을 때 모달창 */}
-
       <h3>Comments</h3>
-      {boardDetailComment
-        .filter((item) => {
-          return boardId === item.boardId;
-        })
-        .map(
-          (item) => (
-            <BoardDetailCommentItem
-              key={item.id}
-              boardComment={item}
-              onCommentDelete={handleModalDeleteClick}
-            />
-          )
-          //   return (
-          // <StyledCommentListBox>
-          //   <h4>{item.nickname}</h4>
-          //   <p>{item.commentPassword}</p>
-          //   <p>{item.onBoardComment}</p>
-          //   <input
-          //     type="password"
-          //     value={pwValue}
-          //     onChange={handlePwValueChange}
-          //     placeholder="비밀번호를 입력하세요."
-          //   />
-
-          //   <button onClick={() => isOpenEditClick(item.id)}>수정</button>
-
-          //   <button onClick={() => handleDeleteDetailCommentClick(item.id)}>
-          //     삭제
-          //   </button>
-          // </StyledCommentListBox>
-          //   );
-        )}
+      {handleBoardCommentList()}
     </StyledCommentListContainer>
   );
 }

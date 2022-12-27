@@ -139,7 +139,6 @@ const BoardDetailTitleContainer = styled.div`
 const BoardDetailTitleName = styled.h1`
   font-weight: bold;
   text-align: left;
-  margin-top: 4rem;
   color: #101010;
   white-space: nowrap;
   overflow: hidden;
