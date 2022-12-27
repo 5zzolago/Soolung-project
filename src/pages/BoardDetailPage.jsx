@@ -109,6 +109,7 @@ const BoardDetailDesc = styled.p`
   color: #555;
   font-size: 1.1rem;
   margin: 4rem 0 8rem;
+  padding: 0 5rem;
 `;
 
 const BoardDetailHeader = styled.header`
