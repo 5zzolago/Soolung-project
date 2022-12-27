@@ -7,9 +7,13 @@ import {
   __createArticleComment,
   __deleteArticleComment,
 } from "../store/modules/articleCommentSlice";
+import { __updateArticle } from "../store/modules/articleSlice";
+import { validateUsername, validateComment } from "../utils/validate";
+import { now } from "../utils/date";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
+import Button from "../components/button/Button";
 import useForm from "../hooks/useForm";
 import ArticleDetailHeader from "../components/article/ArticleDetailHeader";
 import ArticleDetailCommentWrite from "../components/article/ArticleDetailCommentWrite";
@@ -42,23 +46,43 @@ const ArticleDetailPage = () => {
 
   const handlePasswordChange = (e) => setPwValue(e.target.value);
   const handleModalClose = () => setIsOpen(false);
-  const handleArticleFormSubmit = (e) => {
+  const handleArticleFormSubmit = async (e) => {
     e.preventDefault();
-    if (
-      articleFormData.username.trim() === "" ||
-      articleFormData.password.trim() === "" ||
-      articleFormData.comment.trim() === ""
-    ) {
-      alert("빈칸을 입력해주세요.");
+    const isVaildUsername = validateUsername(articleFormData.username);
+    const isVaildComment = validateComment(articleFormData.comment);
+
+    if (!isVaildUsername) {
+      alert("작성자명은 2글자 이상 9글자 미만으로 작성해주세요.");
       return;
     }
+
+    if (articleFormData.password.trim() === "") {
+      alert("비밀번호를 입력해주세요.");
+      return;
+    }
+
+    if (!isVaildComment) {
+      alert("댓글은 1자리 이상 50자리 미만으로 입력해주세요.");
+      return;
+    }
+
     const obj = {
       ...articleFormData,
       id: uuidv4(),
-      createdDate: "2022-12-23",
+      createdDate: now(),
       alcoholId: articleDatas.id,
     };
-    dispatch(__createArticleComment(obj));
+    dispatch(__createArticleComment(obj)).then(() => {
+      const stars = articleComment.filter(
+        (cmt) => cmt.alcoholId === articleDatas.id
+      );
+      console.log("components:", stars);
+      const totalStar = stars
+        .map((s) => Number(s.star))
+        ?.reduce((pre, cur) => pre + cur, 0);
+      const averageStar = (totalStar / stars.length).toFixed(1);
+      dispatch(__updateArticle([articleDatas.id, Number(averageStar)]));
+    });
 
     articleFormData.username = "";
     articleFormData.password = "";
@@ -68,6 +92,7 @@ const ArticleDetailPage = () => {
 
   const handleCommentDelete = (id) => () => {
     setIsOpen(true);
+    setPwValue("");
     setArticleId(id);
   };
 
@@ -91,10 +116,12 @@ const ArticleDetailPage = () => {
   if (error) {
     return <div>{error.message}</div>;
   }
-
   return (
     <ArticleDetailWrap>
-      <ArticleDetailHeader />
+      <ArticleDetailHeader
+        articleDatas={articleDatas}
+        articleComment={articleComment}
+      />
       <ArticleDetailCommentWrite
         articleFormData={articleFormData}
         articleDatas={articleDatas}
@@ -112,27 +139,37 @@ const ArticleDetailPage = () => {
       >
         <Box sx={style}>
           <ArticleDetailModalBox>
-            <TextField
-              id="outlined-password-input"
-              label="Password"
-              type="password"
-              size="small"
-              value={pwValue}
-              onChange={handlePasswordChange}
-              autoComplete="current-password"
-            />
-            <ArticleDetailModalBtn
-              variant="outlined"
-              onClick={handleModalCheckPasswordClick}
-            >
-              확인
-            </ArticleDetailModalBtn>
-            <ArticleDetailModalBtn
-              variant="outlined"
-              onClick={handleModalClose}
-            >
-              취소
-            </ArticleDetailModalBtn>
+            <ArticleDeatilModalTextBox>
+              <ArticleDetailModalText>
+                삭제하시려면 비밀번호를 입력해주세요.
+              </ArticleDetailModalText>
+            </ArticleDeatilModalTextBox>
+            <ArticleDeatilModalBtnBox>
+              <TextField
+                id="outlined-password-input"
+                label="Password"
+                type="password"
+                size="small"
+                value={pwValue}
+                onChange={handlePasswordChange}
+                autoComplete="current-password"
+              />
+              <Button
+                btnType={"closeEditingArticleCommentModal"}
+                size={"quaternary"}
+                outline={true}
+                handler={handleModalClose}
+                height={"secondary"}
+                text={"취소"}
+              />
+              <Button
+                btnType={"checkArticleCommentPassword"}
+                size={"quaternary"}
+                height={"secondary"}
+                handler={handleModalCheckPasswordClick}
+                text={"확인"}
+              />
+            </ArticleDeatilModalBtnBox>
           </ArticleDetailModalBox>
         </Box>
       </Modal>
@@ -160,20 +197,31 @@ const ArticleDetailWrap = styled.div`
 
 const ArticleDetailModalBox = styled.div`
   width: 100%;
+  height: 100%;
   display: flex;
+  flex-direction: column;
   gap: 0.3rem;
   align-items: center;
   justify-content: center;
 `;
 
-const ArticleDetailModalBtn = styled.button`
-  width: 13%;
-  height: 2.4rem;
-  border-radius: 0.5rem;
-  color: white;
-  background-color: #434343;
-  font-weight: bold;
-  cursor: pointer;
+const ArticleDeatilModalTextBox = styled.div`
+  width: 100%;
+  gap: 0.3rem;
+  margin-bottom: 0.5rem;
+`;
+
+const ArticleDetailModalText = styled.p`
+  font-weight: 100%;
+  text-align: center;
+`;
+
+const ArticleDeatilModalBtnBox = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
 `;
 
 export default ArticleDetailPage;

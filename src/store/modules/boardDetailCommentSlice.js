@@ -28,7 +28,7 @@ export const __BoardDetailComment = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const { data } = await axios.post(
-        "http://localhost:8080/boardComments",
+        `${process.env.REACT_APP_API_URL}/boardComments`,
         payload
       );
       return thunkAPI.fulfillWithValue(data);

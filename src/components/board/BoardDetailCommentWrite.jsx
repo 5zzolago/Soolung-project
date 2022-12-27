@@ -10,6 +10,8 @@ import {
   __getBoardDetailComment,
 } from "../../store/modules/boardDetailCommentSlice";
 import { useParams } from "react-router-dom";
+import { TextField } from "@mui/material";
+import Button from "../button/Button";
 
 const BoardDetailCommentWrite = ({ postData }) => {
   const boardDetailComment = useSelector(
@@ -58,30 +60,41 @@ const BoardDetailCommentWrite = ({ postData }) => {
           </BoardDetailHeadBox>
           <BoardDetailForm onSubmit={onBoardFormSubmitEvent}>
             <BoardDetailInputBox>
-              <input
+              <TextField
+                id="username"
+                name="username"
+                type="text"
+                label="작성자"
+                variant="outlined"
+                size="small"
+                sx={{ width: { sm: 280 } }}
                 onChange={handleNicknameInputChange}
-                value={nickname}
-                type="text"
-                placeholder="작성자"
               />
-
-              <input
-                onChange={handlePasswordInputChange}
+              <TextField
+                id="password"
+                name="password"
+                type="password"
+                label="비밀번호"
+                variant="outlined"
+                size="small"
+                sx={{ width: { sm: 280 } }}
                 value={commentPassword}
-                type="text"
-                placeholder="비밀번호"
+                onChange={handlePasswordInputChange}
               />
             </BoardDetailInputBox>
             <BoardDetailCommentBox>
-              <input
+              <TextField
+                id="comment"
+                name="comment"
+                label="어떤 이야기를 나누고 싶으신가요?"
+                fullWidth
+                multiline
+                rows={1.5}
                 value={onBoardComment}
                 onChange={handleCommentInputChange}
-                type="text"
-                placeholder="어떤 이야기를 나누고 싶으신가요?"
               />
-              <BoardDetailCommentBtn type="submit">
-                등록하기
-              </BoardDetailCommentBtn>
+
+              <Button type={"submit"} size={"tertiary"} text={"등록하기"} />
             </BoardDetailCommentBox>
           </BoardDetailForm>
         </BoardDetailContainer>
@@ -141,12 +154,4 @@ const BoardDetailCommentBox = styled.div`
   gap: 1rem;
 `;
 
-const BoardDetailCommentBtn = styled.button`
-  width: 15%;
-  border-radius: 0.5rem;
-  color: white;
-  background-color: #434343;
-  font-weight: bold;
-  cursor: pointer;
-`;
 export default BoardDetailCommentWrite;

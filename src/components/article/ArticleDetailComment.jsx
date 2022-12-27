@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import { __updateArticleComment } from "../../store/modules/articleCommentSlice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { validateComment } from "../../utils/validate";
 import TextField from "@mui/material/TextField";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import Rating from "@mui/material/Rating";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
+import Button from "../button/Button";
 
 const ArticleDetailComment = ({
   articleComment,
@@ -18,11 +20,12 @@ const ArticleDetailComment = ({
   const { id, username, comment, star, createdDate, password } = articleComment;
   const dispatch = useDispatch();
   const [isEditOpen, setIsEditOpen] = useState(false);
-  const [isEditClick, setIsEditClikc] = useState(false);
+  const [isEditClick, setIsEditClick] = useState(false);
   const [editPassword, setEditPassword] = useState("");
 
   const handleArticleUpdateToggle = () => {
     setIsEditOpen(true);
+    setEditPassword("");
     articleEditValue.comment = "";
   };
 
@@ -32,17 +35,23 @@ const ArticleDetailComment = ({
   const handleModalCheckPasswordClick = () => {
     if (password === editPassword) {
       setIsEditOpen(false);
-      setIsEditClikc(true);
+      setIsEditClick(true);
     } else {
       alert("비밀번호가 틀렸습니다.");
       return;
     }
+    articleEditValue.comment = comment;
   };
 
   const handleEditFormSubmit = (e) => {
     e.preventDefault();
+    const isVaildComment = validateComment(articleEditValue.comment);
+    if (!isVaildComment) {
+      alert("댓글은 1자리 이상 50자리 미만으로 입력해주세요.");
+      return;
+    }
     dispatch(__updateArticleComment([id, articleEditValue]));
-    setIsEditClikc(false);
+    setIsEditClick(false);
   };
 
   return (
@@ -55,10 +64,10 @@ const ArticleDetailComment = ({
           </ArticleDetailUserNameBox>
           <ArticleDetailBtnBox>
             <ArticleDetailUpdateBtn onClick={handleArticleUpdateToggle}>
-              <FontAwesomeIcon icon={faPenToSquare} />
+              <FontAwesomeIcon icon={faPenToSquare} color={"#aaa"} />
             </ArticleDetailUpdateBtn>
             <ArticleDetailDeleteBtn onClick={onCommentDeleteEvent(id)}>
-              <FontAwesomeIcon icon={faXmark} />
+              <FontAwesomeIcon icon={faXmark} color={"#aaa"} />
             </ArticleDetailDeleteBtn>
           </ArticleDetailBtnBox>
         </ArticleDetailMainBox>
@@ -77,15 +86,14 @@ const ArticleDetailComment = ({
                 value={articleEditValue.comment}
                 onChange={onEditValueChangeEvent}
               />
-              <ArticleDetailCommentBtn type="submit">
-                등록하기
-              </ArticleDetailCommentBtn>
-              <ArticleDetailCommentBtn
+              <Button
+                btnType={"cancleEditingArticleComment"}
                 type="button"
-                onClick={() => setIsEditClikc(false)}
-              >
-                취소하기
-              </ArticleDetailCommentBtn>
+                outline={true}
+                handler={setIsEditClick}
+                text={"취소"}
+              />
+              <Button btnType={"submitArticle"} type="submit" text={"수정"} />
             </ArticleDetailForm>
           )}
         </ArticleDetailCommentBox>
@@ -100,27 +108,37 @@ const ArticleDetailComment = ({
       >
         <Box sx={style}>
           <ArticleDetailModalBox>
-            <TextField
-              id="outlined-password-input"
-              label="Password"
-              type="password"
-              size="small"
-              value={editPassword}
-              onChange={handleEditModalChange}
-              autoComplete="current-password"
-            />
-            <ArticleDetailModalBtn
-              variant="outlined"
-              onClick={handleModalCheckPasswordClick}
-            >
-              확인
-            </ArticleDetailModalBtn>
-            <ArticleDetailModalBtn
-              variant="outlined"
-              onClick={handleEditModalClose}
-            >
-              취소
-            </ArticleDetailModalBtn>
+            <ArticleDeatilModalTextBox>
+              <ArticleDetailModalText>
+                수정하시려면 비밀번호를 입력해주세요
+              </ArticleDetailModalText>
+            </ArticleDeatilModalTextBox>
+            <ArticleDeatilModalBtnBox>
+              <TextField
+                id="outlined-password-input"
+                label="Password"
+                type="password"
+                size="small"
+                value={editPassword}
+                onChange={handleEditModalChange}
+                autoComplete="current-password"
+              />
+              <Button
+                btnType={"closeEditingArticleCommentModal"}
+                size={"quaternary"}
+                outline={true}
+                handler={handleEditModalClose}
+                height={"secondary"}
+                text={"취소"}
+              />
+              <Button
+                btnType={"checkArticleCommentPassword"}
+                size={"quaternary"}
+                height={"secondary"}
+                handler={handleModalCheckPasswordClick}
+                text={"확인"}
+              />
+            </ArticleDeatilModalBtnBox>
           </ArticleDetailModalBox>
         </Box>
       </Modal>
@@ -165,15 +183,6 @@ const ArticleDetailUpdateBtn = styled.button`
   background-color: transparent;
 `;
 
-const ArticleDetailCommentBtn = styled.button`
-  width: 15%;
-  border-radius: 0.5rem;
-  color: white;
-  background-color: #434343;
-  font-weight: bold;
-  cursor: pointer;
-`;
-
 const ArticleDetailDeleteBtn = styled.button`
   font-size: 1.7rem;
   border: 0;
@@ -210,20 +219,30 @@ const ArticleDetailCreateAt = styled.p`
 
 const ArticleDetailModalBox = styled.div`
   width: 100%;
+  height: 100%;
   display: flex;
-  gap: 0.3rem;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 `;
 
-const ArticleDetailModalBtn = styled.button`
-  width: 13%;
-  height: 2.4rem;
-  border-radius: 0.5rem;
-  color: white;
-  background-color: #434343;
-  font-weight: bold;
-  cursor: pointer;
+const ArticleDeatilModalTextBox = styled.div`
+  width: 100%;
+  gap: 0.3rem;
+  margin-bottom: 0.5rem;
+`;
+
+const ArticleDetailModalText = styled.p`
+  font-weight: 100%;
+  text-align: center;
+`;
+
+const ArticleDeatilModalBtnBox = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
 `;
 
 const style = {
