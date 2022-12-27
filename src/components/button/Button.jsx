@@ -60,6 +60,9 @@ const Button = (props) => {
       case "closeEditingArticleCommentModal":
         return handler();
 
+      case "checkBoardDetailEdit":
+        return handler();
+
       default:
         break;
     }

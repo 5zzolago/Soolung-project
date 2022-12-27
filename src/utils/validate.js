@@ -10,3 +10,8 @@ export function validateComment(comment) {
   if (comment.trim().length > 50) return false;
   return true;
 }
+
+export function validatePassword(password) {
+  if (password.trim() === "") return false;
+  return true;
+}
