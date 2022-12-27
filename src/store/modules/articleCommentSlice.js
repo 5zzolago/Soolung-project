@@ -40,7 +40,7 @@ export const __updateArticleComment = createAsyncThunk(
     const [id, comment] = [payload[0], payload[1]];
     try {
       await axios.patch(`http://localhost:8080/articleComment/${id}`, {
-        comment,
+        ...comment,
       });
       return thunkAPI.fulfillWithValue(payload);
     } catch (error) {

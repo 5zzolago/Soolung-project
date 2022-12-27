@@ -21,6 +21,10 @@ const Button = (props) => {
     // 아티클 댓글 수정 취소
     handler(false);
   };
+  const handleSetIsUpdateClick = () => {
+    // 아티클 댓글 수정 취소
+    handler(false);
+  };
 
   const handleClicked = (btnType) => {
     switch (btnType) {
@@ -42,6 +46,14 @@ const Button = (props) => {
 
       // 아티클 댓글 수정 비밀번호 확인 버튼
       case "checkArticleCommentPassword":
+        return handler();
+
+      // 아티클 댓글 삭제 취소하기 버튼
+      case "cancelDeleteArticleComment":
+        return handleSetIsUpdateClick();
+
+      // 아티클 댓글 삭제 비밀번호 확인 버튼
+      case "checkArticleDelCommentPassword":
         return handler();
 
       // 아티클 댓글 수정 비밀번호 입력 취소 버튼

@@ -13,6 +13,7 @@ import { now } from "../utils/date";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
+import Button from "../components/button/Button";
 import useForm from "../hooks/useForm";
 import ArticleDetailHeader from "../components/article/ArticleDetailHeader";
 import ArticleDetailCommentWrite from "../components/article/ArticleDetailCommentWrite";
@@ -91,6 +92,7 @@ const ArticleDetailPage = () => {
 
   const handleCommentDelete = (id) => () => {
     setIsOpen(true);
+    setPwValue("");
     setArticleId(id);
   };
 
@@ -151,18 +153,21 @@ const ArticleDetailPage = () => {
                 onChange={handlePasswordChange}
                 autoComplete="current-password"
               />
-              <ArticleDetailModalBtn
-                variant="outlined"
-                onClick={handleModalCheckPasswordClick}
-              >
-                확인
-              </ArticleDetailModalBtn>
-              <ArticleDetailModalBtn
-                variant="outlined"
-                onClick={handleModalClose}
-              >
-                취소
-              </ArticleDetailModalBtn>
+              <Button
+                btnType={"closeEditingArticleCommentModal"}
+                size={"quaternary"}
+                outline={true}
+                handler={handleModalClose}
+                height={"secondary"}
+                text={"취소"}
+              />
+              <Button
+                btnType={"checkArticleCommentPassword"}
+                size={"quaternary"}
+                height={"secondary"}
+                handler={handleModalCheckPasswordClick}
+                text={"확인"}
+              />
             </ArticleDeatilModalBtnBox>
           </ArticleDetailModalBox>
         </Box>
@@ -213,17 +218,9 @@ const ArticleDetailModalText = styled.p`
 const ArticleDeatilModalBtnBox = styled.div`
   width: 100%;
   display: flex;
+  align-items: center;
+  justify-content: center;
   gap: 0.3rem;
-`;
-
-const ArticleDetailModalBtn = styled.button`
-  width: 13%;
-  height: 2.4rem;
-  border-radius: 0.5rem;
-  color: white;
-  background-color: #434343;
-  font-weight: bold;
-  cursor: pointer;
 `;
 
 export default ArticleDetailPage;
