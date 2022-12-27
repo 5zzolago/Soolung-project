@@ -15,7 +15,7 @@ const BoardSerach = () => {
   const handleSearchForm = (event) => {
     event.preventDefault();
     axios
-      .get(`http://localhost:8080/board?q=${searchValue}`)
+      .get(`${process.env.REACT_APP_API_URL}/board?q=${searchValue}`)
       .then((response) => {
         navigate("/search", {
           state: { data: response.data },
