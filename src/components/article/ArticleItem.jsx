@@ -58,7 +58,7 @@ function GridView({ article, categories }) {
                   </Link>
                 )}
                 <StyledTitle>{art.title}</StyledTitle>
-                <StyledStar>⭐️ {art.star}</StyledStar>
+                <StyledStar>⭐️ {Number(art.star)}</StyledStar>
               </Grid>
             ))}
         </Grid>
@@ -82,7 +82,7 @@ function GridView({ article, categories }) {
                   </Link>
                 )}
                 <StyledTitle>{art.title}</StyledTitle>
-                <StyledStar>⭐️ {art.star}</StyledStar>
+                <StyledStar>⭐️ {Number(art.star)}</StyledStar>
               </Grid>
             ))}
         </Grid>
