@@ -63,7 +63,7 @@ const EditPage = () => {
       if (window.confirm("수정 하시겠습니까?")) {
         alert("수정 되었습니다.");
         dispatch(__updateBoard([state.id, editObj]));
-        navigate(`/board/${state}`);
+        navigate(`/board/${state.id}`);
       } else {
         alert("취소 되었습니다.");
         return;

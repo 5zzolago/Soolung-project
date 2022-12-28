@@ -53,9 +53,12 @@ export const __updateBoard = createAsyncThunk(
   "updateBoard",
   async (payload, thunkAPI) => {
     try {
-      await axios.patch(`https://spicy-midi-hound.glitch.me/board/${payload[0]}`, {
-        ...payload[1],
-      });
+      await axios.patch(
+        `${process.env.REACT_APP_API_URL}/board/${payload[0]}`,
+        {
+          ...payload[1],
+        }
+      );
       return thunkAPI.fulfillWithValue(payload);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -67,7 +70,7 @@ export const __deleteBoard = createAsyncThunk(
   "deleteBoard",
   async (payload, thunkAPI) => {
     try {
-      await axios.delete(`https://spicy-midi-hound.glitch.me/board/${payload}`);
+      await axios.delete(`${process.env.REACT_APP_API_URL}/board/${payload}`);
       return thunkAPI.fulfillWithValue(payload);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);

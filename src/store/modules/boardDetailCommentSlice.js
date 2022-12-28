@@ -15,7 +15,7 @@ export const __getBoardDetailComment = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const { data } = await axios.get(
-        "https://spicy-midi-hound.glitch.me/boardComments?_sort=createdDate&_order=DESC"
+        `${process.env.REACT_APP_API_URL}/boardComments?_sort=createdDate&_order=DESC`
       );
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
@@ -45,7 +45,9 @@ export const __deleteDetailComment = createAsyncThunk(
   "deleteDetailComment",
   async (payload, thunkAPI) => {
     try {
-      await axios.delete(`https://spicy-midi-hound.glitch.me/boardComments/${payload}`);
+      await axios.delete(
+        `${process.env.REACT_APP_API_URL}/boardComments/${payload}`
+      );
       return thunkAPI.fulfillWithValue(payload);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -58,7 +60,9 @@ export const __editDetailComment = createAsyncThunk(
   "editDetailComment",
   async (payload, thunkAPI) => {
     try {
-      await axios.patch(`https://spicy-midi-hound.glitch.me/boardComments/${payload.id}`);
+      await axios.patch(
+        `${process.env.REACT_APP_API_URL}/boardComments/${payload.id}`
+      );
       return thunkAPI.fulfillWithValue(payload);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
