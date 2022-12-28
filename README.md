@@ -6,7 +6,7 @@
 
 - 프로젝트 기간 : 2022.12.22 ~ 2022.12.28
 
-🔗 [배포링크](https://soolung-project-l9dvh316q-soolung.vercel.app/)
+🔗 [배포링크](https://soolung-project.vercel.app/)
 
 🔗 [시연영상 유튜브](https://www.youtube.com/watch?v=ORML5FRdbYI)
 
@@ -189,4 +189,4 @@ Git Flow 방식을 이용했습니다.
 
 📑 [프로젝트 진행 관련 기록](https://i-ten.tistory.com/251)
 
-📓 [프로젝트를 마치며, KPT 회고]
+📓 [프로젝트를 마치며, KPT 회고](https://i-ten.tistory.com/258)
