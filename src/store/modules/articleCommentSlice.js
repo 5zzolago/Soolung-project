@@ -41,9 +41,12 @@ export const __updateArticleComment = createAsyncThunk(
   async (payload, thunkAPI) => {
     const [id, comment] = [payload[0], payload[1]];
     try {
-      await axios.patch(`https://spicy-midi-hound.glitch.me/articleComment/${id}`, {
-        ...comment,
-      });
+      await axios.patch(
+        `${process.env.REACT_APP_API_URL}/articleComment/${id}`,
+        {
+          ...comment,
+        }
+      );
       return thunkAPI.fulfillWithValue(payload);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
