@@ -58,30 +58,6 @@ const style = {
   p: 4,
 };
 
-const ArticleDetailModalBox = styled.div`
-  width: 100%;
-  display: flex;
-  gap: 0.3rem;
-  align-items: center;
-  justify-content: center;
-`;
-
 const StyledCommentListContainer = styled.div`
   width: 100%;
-`;
-
-const StyledCommentListBox = styled.div`
-  border: 1px solid black;
-  padding: 10px;
-  margin: 20px;
-`;
-
-const ArticleDetailModalBtn = styled.button`
-  width: 13%;
-  height: 2.4rem;
-  border-radius: 0.5rem;
-  color: white;
-  background-color: #434343;
-  font-weight: bold;
-  cursor: pointer;
 `;
