@@ -4,7 +4,6 @@ import TextField from "@mui/material/TextField";
 import styled from "styled-components";
 
 const BoardDetailWrite = ({ onArticleFormSubmitEvent }) => {
-  //   const { username, password, comment } = articleFormData;
   return (
     <BoardDetailWrap>
       <BoardDetailContainer>
@@ -21,8 +20,6 @@ const BoardDetailWrite = ({ onArticleFormSubmitEvent }) => {
               variant="outlined"
               size="small"
               sx={{ width: { sm: 280 } }}
-              //   value={username}
-              //   onChange={onFormValueChangeEvent}
             />
             <TextField
               id="password"
@@ -32,8 +29,6 @@ const BoardDetailWrite = ({ onArticleFormSubmitEvent }) => {
               variant="outlined"
               size="small"
               sx={{ width: { sm: 280 } }}
-              //   value={password}
-              //   onChange={onFormValueChangeEvent}
             />
           </BoardDetailInputBox>
           <BoardDetailCommentBox>
@@ -44,8 +39,6 @@ const BoardDetailWrite = ({ onArticleFormSubmitEvent }) => {
               fullWidth
               multiline
               rows={1.5}
-              //   value={comment}
-              //   onChange={onFormValueChangeEvent}
             />
             <BoardDetailCommentBtn type="submit">
               등록하기
@@ -53,9 +46,6 @@ const BoardDetailWrite = ({ onArticleFormSubmitEvent }) => {
           </BoardDetailCommentBox>
         </BoardDetailForm>
       </BoardDetailContainer>
-      {/* {articleComment.map((cmt) => (
-        <BoardDetailComment key={cmt.id} articleComment={cmt} />
-      ))} */}
     </BoardDetailWrap>
   );
 };
